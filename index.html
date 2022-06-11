@@ -13,11 +13,15 @@
         <section class="popup">
             <div class="popup__window">
                 <button class="popup__close"></button>
-                <p class="popup__text">Редактировать профиль</p>
-                <input class="popup__textarea-name" placeholder="Жак-Ив-Кусто">
-                <input class="popup__textarea-status" placeholder="Исследователь океана">
+                <h2 class="popup__text">Редактировать профиль</h2>
+                <form class="popup__form" name="form"> 
+                    <input type="text" class="popup__textarea popup__textarea_name" name ="textName"placeholder="Жак-Ив-Кусто">
+                    <input type="text" class="popup__textarea popup__textarea_status" name="textJob" placeholder="Исследователь океана">
+                    <input type="submit" class="popup__save" value="Сохранить" name="subbutton"></input>
+                </form>
+             
               
-                <button class="popup__save">Сохранить</button>
+                
 
 
             </div>
@@ -33,7 +37,7 @@
                      <img src="./images/image.jpg" alt="кусто" class="profile__avatar">
                     <div class="profile__wrapper">
                         <div class="profile__button-block">
-                            <p class="profile__name">Жак-ив-кусто </p>
+                            <h1 class="profile__name">Жак-ив-кусто </h1>
                             <button class="profile__edit-button"></button>
                         </div>
 
@@ -50,57 +54,57 @@
 
             </section>
             <section class="elements">
-                <div class="card">
+                <article class="card">
                     <img class="card__image" src="./images/kirill-pershin-1088404-unsplash.png" alt='развалины'>
                     <div class="card__text-wrapper">
-                        <p class="card__text">Карачаево-Черкессия
+                        <h3 class="card__text">Карачаево-Черкессия
 
-                        </p><button class="card__like-button"></button>
+                        </h3><button class="card__like-button"></button>
                     </div>
 
-                </div>
-                <div class="card">
+                </article>
+                <article class="card">
                     <img class="card__image" src="./images/kirill-pershin-1404681-unsplash.png" alt='Горы'>
                     <div class="card__text-wrapper">
-                        <p class="card__text">Гора Эльбрус
+                        <h3 class="card__text">Гора Эльбрус
 
-                        </p> <button class="card__like-button"></button>
+                        </h3> <button class="card__like-button"></button>
                     </div>
 
-                </div>
+                </article>
                 <div class="card">
                     <img class="card__image" src="./images/kirill-pershin-1556355-unsplash.png" alt='другие горы'>
                     <div class="card__text-wrapper">
-                        <p class="card__text">Домбай
+                        <h3 class="card__text">Домбай
 
-                        </p><button class="card__like-button"></button>
+                        </h3><button class="card__like-button"></button>
                     </div>
                 </div>
-                <div class="card">
+                <article class="card">
                     <img class="card__image" src="./images/matvey-matthew-misura-bri2sMNlpwc-unsplash.jpg" alt="бутово">
                     <div class="card__text-wrapper">
-                        <p class="card__text">Бутово
+                        <h3 class="card__text">Бутово
 
-                        </p><button class="card__like-button"></button>
+                        </h3><button class="card__like-button"></button>
                     </div>
 
-                </div>
-                <div class="card">
+                </article>
+                <article class="card">
                     <img class="card__image" src="./images/ivan-EV8APnE6qu0-unsplash(2).jpg" alt="мытищи">
                     <div class="card__text-wrapper">
-                        <p class="card__text">Мытищи
+                        <h3 class="card__text">Мытищи
 
-                        </p><button class="card__like-button"></button>
+                        </h3><button class="card__like-button"></button>
                     </div>
 
-                </div>
+                </article>
                 <div class="card">
                     <img class="card__image" src="./images/julia-kirilova-JamwlgNKqI0-unsplash.jpg"
                         alt="онежское озеро">
                     <div class="card__text-wrapper">
-                        <p class="card__text"> Онежское озеро, у меня кончились живописные районы.
+                        <h3 class="card__text"> Онежское озеро, у меня кончились живописные районы.
 
-                        </p> <button class="card__like-button"></button>
+                        </h3> <button class="card__like-button"></button>
                     </div>
 
 

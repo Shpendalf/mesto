@@ -1,22 +1,3 @@
-const openButton = document.querySelector('.profile__edit-button')
-const popupClass = document.querySelector('.popup')
-const closeButton = document.querySelector('.popup__close')
-
-openButton.addEventListener('click', openPopup)
-closeButton.addEventListener('click', closePopup)
-
-function openPopup(event){
-    event.preventDefault()
-    popupClass.classList.add('popup_open')
-    }
-function closePopup(){
-    popupClass.classList.remove('popup_open')
-}    
-
-
-
-
-
 /*const infoSend = document.querySelector('.popup__save')
 const profileContainer = document.querySelector('.profile__wrapper')
 const profName = document.querySelector('.popup__textarea-name')
@@ -37,29 +18,46 @@ function addInfo(evt) {
 profileContainer.addEventListener(submit,addInfo)
 infoSend.addEventListener('click' ,addInfo)*/
 
-const infoSend = document.querySelector('.popup__save');
-const textName = document.querySelector ('.popup__textarea-name');
+const openButton = document.querySelector('.profile__edit-button')
+const popupClass = document.querySelector('.popup')
+const closeButton = document.querySelector('.popup__close')
+const formElement = document.querySelector('.popup__form');
+const nameInput = document.querySelector ('.popup__textarea_name');
 const profName = document.querySelector('.profile__name');
-const textStatus = document.querySelector('.popup__textarea-status')
+const jobInput = document.querySelector('.popup__textarea_status')
 const profStatus = document.querySelector('.profile__status')
-const formElement= document.querySelector('.profile__wrapper')
+
+
+
+function openPopup(event){
+      popupClass.classList.add('popup_open')
+      nameInput.value=''
+      jobInput.value=''
+      nameInput.value=profName.textContent;
+      jobInput.value=profStatus.textContent;
+      
+    }
+function closePopup(){
+    popupClass.classList.remove('popup_open')
+    }
+
+
 
 function textChange(evt){
     evt.preventDefault();
     
-    profName.textContent=textName.value;
-    profStatus.textContent=textStatus.value;
-    textName.value="";
-    textStatus.value="";
-    textName.placeholder=profName.textContent;
-    textStatus.placeholder=profStatus.textContent;
+    profName.textContent=nameInput.value;
+    profStatus.textContent=jobInput.value;
+  
     profName.value="";
     profStatus.value=""   
-
+    popupClass.classList.remove('popup_open')
 }
-infoSend.addEventListener('click' ,textChange)
+formElement.addEventListener('submit',textChange)
 
-formElement.addEventListener('submit', textChange); 
+
+openButton.addEventListener('click', openPopup)
+closeButton.addEventListener('click', closePopup)
 
 
 

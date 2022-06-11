@@ -12,14 +12,14 @@
 @import url(../blocks/profile/__status/profile__status.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/_open/popup_open.css);
 @import url(../blocks/popup/__window/popup__window.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__text/popup__text.css);
 @import url(../blocks/popup/__save/popup__save.css);
-@import url(../blocks/popup/__textarea-name/popup__textarea-name.css);
-@import url(../blocks/popup/__textarea-status/popup__textarea-status.css);
+@import url(../blocks/popup/__textarea/popup__textarea.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__image/card__image.css);
