@@ -1,5 +1,5 @@
-.profile__button-block{
-    display:flex;
-    flex-direction:row;
+.profile__button-block {
+    display: flex;
+    flex-direction: row;
     align-items: baseline;
 }

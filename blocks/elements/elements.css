@@ -3,7 +3,6 @@
     display: grid;
     align-items: center;
     justify-items: center;
-
     row-gap: 20px;
     column-gap: 17px;
     grid-template-columns: repeat(3, minmax(282px, 1fr));
