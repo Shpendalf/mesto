@@ -8,7 +8,7 @@
 }
 
 .popup__form:last-child {
-    row-gap: 48px
+    row-gap: 48px;
 }
 
 @media screen and (max-width:600px) {
