@@ -4,16 +4,8 @@
     align-items: center;
     row-gap: 30px;
     margin: 0 0;
-    padding: 0 0;
+    
 }
 
-.popup__form:last-child {
-    row-gap: 48px;
-}
 
-@media screen and (max-width:600px) {
-    .popup__form:last-child {
-        row-gap: 45px;
-    }
 
-}
