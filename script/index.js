@@ -35,7 +35,7 @@ const container = document.querySelector('.main');
 const cardsContainer = container.querySelector('.elements');
 const cardTemplate = document.querySelector('.card-template').content;
 const cardListElement = cardTemplate.cloneNode(true);
-const popupBigImage =  document.querySelector('.popup__bigimage');
+const popupBigImage =  document.querySelector('.popup_bigimage');
 const BigImageClose = document.querySelector('.popup__close-Bigimg')
 
 
@@ -149,8 +149,8 @@ function textChange(evt) {
 }
 
 
- const formImg = document.querySelector('.input__text_type_img') 
- const formText = document.querySelector('.input__text_type_title')
+ const formImg = document.querySelector('.popup__text_type_img') 
+ const formText = document.querySelector('.popup__text_type_title')
 
   function submitCard(evt){
   evt.preventDefault();
