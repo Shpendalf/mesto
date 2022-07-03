@@ -149,8 +149,8 @@ function textChange(evt) {
 }
 
 
- const formImg = document.querySelector('.popup__text_type_img') 
- const formText = document.querySelector('.popup__text_type_title')
+ const formImg = document.querySelector('.popup__textarea_img') 
+ const formText = document.querySelector('.popup__textarea_title')
 
   function submitCard(evt){
   evt.preventDefault();
