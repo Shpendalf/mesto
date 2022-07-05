@@ -5,10 +5,11 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-
-    visibility: hidden;
     align-items: center;
     opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
     z-index:3;
+    transition: visibility 0.5s, opacity 1s  linear;
+    visibility:hidden;
+    padding-top:12.5vw;
+    padding-bottom:12.5vw;
 }

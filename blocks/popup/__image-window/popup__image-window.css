@@ -1,10 +1,6 @@
 .popup__image-window{
   
-        display:flex;
-        flex-direction: column;
-        align-self:center;
-        width:max-content;
-        z-index:2;
-        max-height:fit-content;
-        text-align:left;
+      position:relative;
+      margin:0;
+      bottom:25%
 }
