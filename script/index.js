@@ -57,7 +57,7 @@ renderCards();
 
 const openPopup = (popup) => {
   popup.classList.add('popup_open')
-  }
+}
 
 function openBigImageHandler(e) {
   const text = e.target.parentNode.querySelector('.card__title').textContent;
@@ -65,7 +65,7 @@ function openBigImageHandler(e) {
 }
 
 function renderCard(sourceValue, titleValue) {
- 
+
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image')
   cardImage.src = sourceValue;
@@ -97,6 +97,17 @@ function openProfilePopup() {
 function openPopupAdd(event) {
   openPopup(popupAddImg);
 }
+function closePopups() {
+  const activePopups = document.querySelectorAll('.popup_open');
+  activePopups.forEach(function (element) {
+    element.classList.remove('popup_open');
+  });
+}
+
+
+const closePopup = (element) => {
+  closePopups(element)
+}
 
 function openPopupImg(src, text) {
   openPopup(popupBigImage);
@@ -104,13 +115,6 @@ function openPopupImg(src, text) {
   bigImage.src = src;
   bigImage.alt = text;
   popupBigImage.querySelector('.popup__title').textContent = text;
-}
-
-function closePopup() {
-  const activePopups = document.querySelectorAll('.popup_open');
-  activePopups.forEach(function (element) {
-    element.classList.remove('popup_open');
-  });
 }
 
 function changeProfile(evt) {
@@ -140,11 +144,3 @@ popupAddBtn.addEventListener('click', openPopupAdd)
 profileButtonClose.addEventListener('click', closePopup)
 buttonAddImgClose.addEventListener('click', closePopup)
 bigImageClose.addEventListener('click', closePopup)
-
-
-
-
-
-
-
-
