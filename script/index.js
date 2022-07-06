@@ -16,6 +16,7 @@ const cardsContainer = container.querySelector('.elements');
 const cardTemplate = document.querySelector('.card-template').content;
 const popupBigImage = document.querySelector('.popup_bigimage');
 const bigImageClose = document.querySelector('.popup__close-bigimg')
+const popupOpen = document.querySelector('.popup_opened');
 const readyCards = [{
   name: 'Архыз',
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -58,7 +59,9 @@ renderCards();
 const openPopup = (popup) => {
   popup.classList.add('popup_open')
 }
-
+const closePopup = (popup) => {
+  popup.classList.remove('popup_open')  
+}
 function openBigImageHandler(e) {
   const text = e.target.parentNode.querySelector('.card__title').textContent;
   openPopupImg(e.target.src, text);
@@ -97,17 +100,10 @@ function openProfilePopup() {
 function openPopupAdd(event) {
   openPopup(popupAddImg);
 }
-function closePopups() {
-  const activePopups = document.querySelectorAll('.popup_open');
-  activePopups.forEach(function (element) {
-    element.classList.remove('popup_open');
-  });
-}
 
 
-const closePopup = (element) => {
-  closePopups(element)
-}
+
+
 
 function openPopupImg(src, text) {
   openPopup(popupBigImage);
@@ -124,6 +120,7 @@ function changeProfile(evt) {
   profileName.value = "";
   profileJob.value = "";
   closePopup(popupProfile)
+  
 }
 
 const formImg = document.querySelector('.popup__textarea_link')
@@ -131,16 +128,16 @@ const formText = document.querySelector('.popup__textarea_img-title')
 
 function submitCard(evt) {
   evt.preventDefault();
-  renderCard(formImg.value, formText.value)
-  closePopup(popupBigImage);
+  renderCard(formImg.value, formText.value);
+  closePopup(popupAddImg);
   formImg.value = '';
   formText.value = '';
 };
 
-formElementImg.addEventListener('submit', submitCard);
+formElementImg.addEventListener('submit', submitCard)
 formElementProfile.addEventListener('submit', changeProfile);
 profileButtonOpen.addEventListener('click', openProfilePopup)
 popupAddBtn.addEventListener('click', openPopupAdd)
-profileButtonClose.addEventListener('click', closePopup)
-buttonAddImgClose.addEventListener('click', closePopup)
-bigImageClose.addEventListener('click', closePopup)
+profileButtonClose.addEventListener('click',() => {closePopup(popupProfile)})
+buttonAddImgClose.addEventListener('click', () => {closePopup(popupAddImg)})
+bigImageClose.addEventListener('click', () => {closePopup(popupBigImage)})
