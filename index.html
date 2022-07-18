@@ -14,12 +14,14 @@
             <div class="popup__window">
                 <button type="button" class="popup__close popup__close-profile"></button>
                 <h2 class="popup__text">Редактировать профиль</h2>
-                <form class="popup__form popup__form-profile" name="form">
-                    <input type="text" class="popup__textarea popup__textarea_type_name" name="textName"
-                        placeholder="Жак-Ив-Кусто">
-                    <input type="text" class="popup__textarea popup__textarea_type_status" name="textJob"
-                        placeholder="Исследователь океана">
-                    <input type="submit" class="popup__save " value="Сохранить" name="subbutton">
+                <form class="popup__form popup__form-profile" name="user" novalidate >
+                 
+                    <input type="text" id="name-input"    class="popup__textarea popup__textarea_type_name" minlength="2" maxlength="30" required name="profileName">
+                    <span id ="name-input-error" class="popup__error "></span>
+                    <input type="text"  id="job-input"  class="popup__textarea popup__textarea_type_status"  minlength="2" maxlength="30" required name="jobName">
+                    <span id ="job-input-error" class="popup__error"></span>
+                    <input type="submit" class="popup__button popup__save popup__button_invalid"  value="Сохранить"
+                        name="subbutton">
                 </form>
             </div>
         </section>
@@ -27,12 +29,15 @@
             <div class="popup__window">
                 <button type="button" class="popup__close popup__close-img"></button>
                 <h2 class="popup__text">Новое место</h2>
-                <form class="popup__form popup__form-img" name="form">
-                    <input type="text" placeholder="заголовок" class="popup__textarea popup__textarea_img-title"
-                        name="title">
-                    <input type="text" placeholder="ссылка на картинку" class="popup__textarea popup__textarea_link"
-                        name="img">
-                    <input type="submit" class="popup__save" value="Сохранить" name="subbutton">
+                <form class="popup__form popup__form-img" name="new" novalidate>
+                    <input type="text" placeholder="заголовок"  id ="name-card"class="popup__textarea popup__textarea_img-title"
+                        minlength="2" maxlength="30" required name="title">
+                    <span id ="name-card-error" class="popup__error "></span>
+                    <input type="url" id="link" placeholder="ссылка на картинку" class="popup__textarea popup__textarea_link"
+                       required name="img">
+                    <span id ="link-error" class="popup__error"></span>
+                    <input type="submit" class="popup__button popup__add popup__button_invalid " value="Сохранить"
+                        name="subbutton">
                 </form>
             </div>
         </section>
@@ -100,6 +105,8 @@
     </div>
     <script defer src="./script/index.js">
     </script>
+    <script defer src="./script/validate.js"></script>
+
 </body>
 
 

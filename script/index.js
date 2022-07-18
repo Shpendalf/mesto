@@ -17,7 +17,9 @@ const cardTemplate = document.querySelector('.card-template').content;
 const popupBigImage = document.querySelector('.popup_bigimage');
 const bigImageClose = document.querySelector('.popup__close-bigimg')
 const popupOpen = document.querySelector('.popup_opened');
+
 const readyCards = [{
+
   name: 'Архыз',
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
 },
@@ -134,6 +136,12 @@ function submitCard(evt) {
   formText.value = '';
 };
 
+function closeOnclick (e){
+  if(e.target!== e.currentTarget) return;
+else
+{closePopup (popupBigImage)}}
+
+
 formElementImg.addEventListener('submit', submitCard)
 formElementProfile.addEventListener('submit', changeProfile);
 profileButtonOpen.addEventListener('click', openProfilePopup)
@@ -141,3 +149,29 @@ popupAddBtn.addEventListener('click', openPopupAdd)
 profileButtonClose.addEventListener('click',() => {closePopup(popupProfile)})
 buttonAddImgClose.addEventListener('click', () => {closePopup(popupAddImg)})
 bigImageClose.addEventListener('click', () => {closePopup(popupBigImage)})
+window.addEventListener('keydown',function(e){
+  if (e.key === 'Escape') {
+    closePopup(popupProfile)
+    closePopup(popupAddImg)
+    closePopup(popupBigImage)
+}})
+popupBigImage.addEventListener('click', (e)=>{
+if(e.target!== e.currentTarget) return;
+else
+{closePopup (popupBigImage)}}
+)
+popupProfile.addEventListener('click', (e) =>{
+if (e.target!== e.currentTarget) return; 
+else
+{closePopup (popupProfile)}
+
+})
+popupAddImg.addEventListener('click',(e) => {
+  if (e.target!== e.currentTarget) return; 
+  else
+  {closePopup (popupAddImg)}
+  
+  })
+
+
+
