@@ -1,16 +1,17 @@
-.popup__error{
-    color:red;
-    font-size:12px;
+.popup__error {
+    color: red;
+    font-size: 12px;
     line-height: 14.52px;
-    opacity:0;
+    opacity: 0;
     width: 358px;
     margin-top: -30px;
-    border-top:1px solid red;
-   
-  
+    border-top: 1px solid red;
+
+
 }
-@media screen and (max-width:600px){
-    .popup__error{
-        width:84.39716312056738%
+
+@media screen and (max-width:600px) {
+    .popup__error {
+        width: 84.39716312056738%;
     }
 }
