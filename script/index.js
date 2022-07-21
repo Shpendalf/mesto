@@ -1,3 +1,4 @@
+
 const profileButtonOpen = document.querySelector('.profile__edit-button')
 const popupClass = document.querySelectorAll('.popup')
 const popupProfile = document.querySelector('.popup_profile')
@@ -59,11 +60,22 @@ const renderCards = () => readyCards.forEach(function (element) {
 renderCards();
 
 const openPopup = (popup) => {
-  popup.classList.add('popup_open')
+  popup.classList.add('popup_open');
+  window.addEventListener('keydown',keydownClose)
+  
+
 }
 const closePopup = (popup) => {
-  popup.classList.remove('popup_open')  
+  popup.classList.remove('popup_open') ;
+  window.removeEventListener('keydown',keydownClose)
 }
+
+const keydownClose = (e)=>{
+  if (e.key === 'Escape') {
+    closePopup(popupAddImg)
+    closePopup(popupBigImage)
+    closePopup(popupProfile)
+    }}
 function openBigImageHandler(e) {
   const text = e.target.parentNode.querySelector('.card__title').textContent;
   openPopupImg(e.target.src, text);
@@ -92,15 +104,19 @@ function renderCard(sourceValue, titleValue) {
 
 function openProfilePopup() {
   openPopup(popupProfile);
+
+  validateForm(formElementProfile)
   nameInput.value = ''
   jobInput.value = ''
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-
+  
+ 
 }
 
 function openPopupAdd(event) {
   openPopup(popupAddImg);
+  validateForm(formElementImg)
 }
 
 
@@ -113,6 +129,7 @@ function openPopupImg(src, text) {
   bigImage.src = src;
   bigImage.alt = text;
   popupBigImage.querySelector('.popup__title').textContent = text;
+  
 }
 
 function changeProfile(evt) {
@@ -149,12 +166,7 @@ popupAddBtn.addEventListener('click', openPopupAdd)
 profileButtonClose.addEventListener('click',() => {closePopup(popupProfile)})
 buttonAddImgClose.addEventListener('click', () => {closePopup(popupAddImg)})
 bigImageClose.addEventListener('click', () => {closePopup(popupBigImage)})
-window.addEventListener('keydown',function(e){
-  if (e.key === 'Escape') {
-    closePopup(popupProfile)
-    closePopup(popupAddImg)
-    closePopup(popupBigImage)
-}})
+
 popupBigImage.addEventListener('click', (e)=>{
 if(e.target!== e.currentTarget) return;
 else
@@ -173,5 +185,5 @@ popupAddImg.addEventListener('click',(e) => {
   
   })
 
-
+ 
 
