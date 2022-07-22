@@ -66,11 +66,9 @@ function validateForm(form, { activeButtonClass, inactiveButtonClass, buttonElem
   if (form.checkValidity(submitButton, { activeButtonClass, inactiveButtonClass })) {
     submitButton.removeAttribute('disabled')
     submitButton.classList.add(activeButtonClass)
-    submitButton.classList.remove(inactiveButtonClass)
+    //submitButton.classList.remove(inactiveButtonClass)
   } else {
-    //submitButton.setAttribute('disabled', true)
-    //submitButton.classList.remove(activeButtonClass)
-    //submitButton.classList.add(inactiveButtonClass)
+     submitButton.classList.add(inactiveButtonClass)
     disableButton(submitButton, { activeButtonClass, inactiveButtonClass })
   }
 

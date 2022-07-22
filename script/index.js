@@ -68,7 +68,7 @@ const openPopup = (popup) => {
 const closePopup = (popup) => {
   popup.classList.remove('popup_open');
   window.removeEventListener('keydown', closeOnKeydown)
-  resetForm(popup, parameters);
+
 }
 
 function resetForm(popup, parameters) {
@@ -77,8 +77,10 @@ function resetForm(popup, parameters) {
   const inputs = Array.from(popup.querySelectorAll(parameters.formInput));
 
   if (button) {
-    button.disabled = true;
     button.classList.add(parameters.inactiveButtonClass);
+    button.disabled = true;
+    button.classList.remove(parameters.activeButtonClass)
+    
   }
 
   errors.forEach((error) => {
@@ -92,12 +94,13 @@ function resetForm(popup, parameters) {
 }
 
 const closeOnKeydown = (e) => {
-  const openedPopup = document.querySelector('.popup_open')
+  
   if (e.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_open')
     closePopup(openedPopup)
   }
 }
-function openBigImageHandler(e) {
+function openBigImage(e) {
   const text = e.target.closest('.card').querySelector('.card__title').textContent;
   openPopupImg(e.target.src, text);
 }
@@ -116,7 +119,7 @@ function createCard(sourceValue, titleValue) {
 
   });
 
-  cardImage.addEventListener('click', openBigImageHandler)
+  cardImage.addEventListener('click', openBigImage)
   return cardElement
 }
 function renderCard(sourceValue, titleValue) {
@@ -168,13 +171,12 @@ function closeOnclick(e) {
 
 formElementImg.addEventListener('submit', submitCard)
 formElementProfile.addEventListener('submit', changeProfile);
-profileButtonOpen.addEventListener('click', openProfilePopup)
-popupAddBtn.addEventListener('click', openPopupAdd)
+profileButtonOpen.addEventListener('click', openProfilePopup,resetForm(profileButtonOpen, parameters))
+popupAddBtn.addEventListener('click', openPopupAdd,resetForm(popupAddBtn, parameters))
 profileButtonClose.addEventListener('click', () => { closePopup(popupProfile) })
 buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
 bigImageClose.addEventListener('click', () => { closePopup(popupBigImage) })
-popupBigImage.addEventListener('click', (popupBigImage) => { closeOnclick(popupBigImage) })
-popupProfile.addEventListener('click', (popupProfile) => { closeOnclick(popupProfile) })
-popupAddImg.addEventListener('click', (popupAddImg) => { closeOnclick(popupAddImg) })
-
+popupBigImage.addEventListener('click', closeOnclick)
+popupProfile.addEventListener('click', closeOnclick)
+popupAddImg.addEventListener('click', closeOnclick)
 renderCards();
