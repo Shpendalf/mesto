@@ -29,30 +29,31 @@ function validateInput(input) {
   }
 }
 
-const setEventListeners = function (form,formInput,inactiveButtonClass, formInput, buttonElement, activeButtonClass) {
-  const submitButton = form.querySelector(buttonElement);
+const setEventListeners = function (form) {
   const inputList = Array.from(form.querySelectorAll(formInput))
   inputList.forEach(function (input) {
     input.addEventListener('input', function () {
-      validateInput(input)
-      validateForm(form, inactiveButtonClass, buttonElement, activeButtonClass, submitButton)
+      validateInput(input,config)
+      validateForm(form,config)
     })
   })
 }
 
-const enableValidation = ({ formElement, inactiveButtonClass, formInput, buttonElement, activeButtonClass, inputErrorClass, inputErrorClassActive }) => {
+const enableValidation = (config) => {
+  const {formElement, inactiveButtonClass, formInput, buttonElement, activeButtonClass, inputErrorClass, inputErrorClassActive}= config
   const formList = Array.from(document.querySelectorAll(formElement))
+
   formList.forEach((form) => {
 
     form.addEventListener('submit', function (evt) {
       evt.preventDefault()
     })
-    setEventListeners(form,formInput)
+    setEventListeners(form,formInput,...rest)
   })
 }
 
-function validateForm(form, inactiveButtonClass, submitButton, activeButtonClass) {
- 
+function validateForm(form,{buttonElement,activeButtonClass,inactiveButtonClass}) {
+  const submitButton = form.querySelector(buttonElement);
   if (form.checkValidity()) {
     submitButton.removeAttribute('disabled')
     submitButton.classList.add(activeButtonClass)
