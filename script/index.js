@@ -1,6 +1,6 @@
 
 const profileButtonOpen = document.querySelector('.profile__edit-button')
-const popupClass = document.querySelectorAll('.popup')
+const popupClasses = document.querySelectorAll('.popup')
 const popupProfile = document.querySelector('.popup_profile')
 const popupAddImg = document.querySelector('.popup_img')
 const profileButtonClose = document.querySelector('.popup__close-profile')
@@ -17,8 +17,8 @@ const cardsContainer = container.querySelector('.elements');
 const cardTemplate = document.querySelector('.card-template').content;
 const popupBigImage = document.querySelector('.popup_bigimage');
 const bigImageClose = document.querySelector('.popup__close-bigimg')
-const popupOpen = document.querySelector('.popup_opened');
-
+const bigImage = popupBigImage.querySelector('.popup__image')
+const bigImageTitle = popupBigImage.querySelector('.popup__title')
 const readyCards = [{
 
   name: 'Архыз',
@@ -51,33 +51,29 @@ const prependToContainer = (container, element) => {
 }
 
 const renderCards = () => readyCards.forEach(function (element) {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  const cardImage = cardElement.querySelector('.card__image')
   renderCard(element.link, element.name);
-  cardImage.alt = element.name
-
 })
-renderCards();
+
 
 const openPopup = (popup) => {
   popup.classList.add('popup_open');
-  window.addEventListener('keydown',keydownClose)
-  
+  window.addEventListener('keydown', closeOnKeydown)
+
 
 }
 const closePopup = (popup) => {
-  popup.classList.remove('popup_open') ;
-  window.removeEventListener('keydown',keydownClose)
+  popup.classList.remove('popup_open');
+  window.removeEventListener('keydown', closeOnKeydown)
 }
 
-const keydownClose = (e)=>{
+const closeOnKeydown = (e) => {
+  const openedPopup = document.querySelector('.popup_open')
   if (e.key === 'Escape') {
-    closePopup(popupAddImg)
-    closePopup(popupBigImage)
-    closePopup(popupProfile)
-    }}
+    closePopup(openedPopup)
+  }
+}
 function openBigImageHandler(e) {
-  const text = e.target.parentNode.querySelector('.card__title').textContent;
+  const text = e.target.closest('.card').querySelector('.card__title').textContent;
   openPopupImg(e.target.src, text);
 }
 
@@ -106,40 +102,30 @@ function openProfilePopup() {
   openPopup(popupProfile);
 
   validateForm(formElementProfile)
-  nameInput.value = ''
-  jobInput.value = ''
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  
- 
+
+
 }
 
 function openPopupAdd(event) {
   openPopup(popupAddImg);
   validateForm(formElementImg)
 }
-
-
-
-
-
 function openPopupImg(src, text) {
   openPopup(popupBigImage);
-  const bigImage = popupBigImage.querySelector('.popup__image')
   bigImage.src = src;
   bigImage.alt = text;
-  popupBigImage.querySelector('.popup__title').textContent = text;
-  
+  bigImageTitle.textContent = text;
+
 }
 
 function changeProfile(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  profileName.value = "";
-  profileJob.value = "";
   closePopup(popupProfile)
-  
+
 }
 
 const formImg = document.querySelector('.popup__textarea_link')
@@ -153,37 +139,21 @@ function submitCard(evt) {
   formText.value = '';
 };
 
-function closeOnclick (e){
-  if(e.target!== e.currentTarget) return;
-else
-{closePopup (popupBigImage)}}
+function closeOnclick(e) {
+  if (e.target !== e.currentTarget) return;
+  else { closePopup(e.currentTarget) }
+}
 
 
 formElementImg.addEventListener('submit', submitCard)
 formElementProfile.addEventListener('submit', changeProfile);
 profileButtonOpen.addEventListener('click', openProfilePopup)
 popupAddBtn.addEventListener('click', openPopupAdd)
-profileButtonClose.addEventListener('click',() => {closePopup(popupProfile)})
-buttonAddImgClose.addEventListener('click', () => {closePopup(popupAddImg)})
-bigImageClose.addEventListener('click', () => {closePopup(popupBigImage)})
+profileButtonClose.addEventListener('click', () => { closePopup(popupProfile) })
+buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
+bigImageClose.addEventListener('click', () => { closePopup(popupBigImage) })
+popupBigImage.addEventListener('click', (popupBigImage) => { closeOnclick(popupBigImage) })
+popupProfile.addEventListener('click', (popupProfile) => { closeOnclick(popupProfile) })
+popupAddImg.addEventListener('click', (popupAddImg) => { closeOnclick(popupAddImg) })
 
-popupBigImage.addEventListener('click', (e)=>{
-if(e.target!== e.currentTarget) return;
-else
-{closePopup (popupBigImage)}}
-)
-popupProfile.addEventListener('click', (e) =>{
-if (e.target!== e.currentTarget) return; 
-else
-{closePopup (popupProfile)}
-
-})
-popupAddImg.addEventListener('click',(e) => {
-  if (e.target!== e.currentTarget) return; 
-  else
-  {closePopup (popupAddImg)}
-  
-  })
-
- 
-
+renderCards();
