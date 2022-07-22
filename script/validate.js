@@ -29,7 +29,7 @@ function validateInput(input, rest) {
   }
 }
 
-const setEventListeners = function (form, {formInput, ...rest }) {
+const setEventListeners = function (form, { formInput, ...rest }) {
   const inputList = Array.from(form.querySelectorAll(formInput))
 
   inputList.forEach(function (input) {
@@ -53,7 +53,7 @@ const enableValidation = (parameters) => {
   })
 }
 
-const disableButton = ({activeButtonClass,inactiveButtonClass}) => {
+const disableButton = (submitButton, { activeButtonClass, inactiveButtonClass }) => {
   submitButton.setAttribute('disabled', true)
   submitButton.classList.remove(activeButtonClass)
   submitButton.classList.add(inactiveButtonClass)
@@ -63,7 +63,7 @@ function validateForm(form, { activeButtonClass, inactiveButtonClass, buttonElem
   console.log(form);
   const submitButton = form.querySelector(buttonElement)
 
-  if (form.checkValidity(submitButton,{activeButtonClass,inactiveButtonClass})) {
+  if (form.checkValidity(submitButton, { activeButtonClass, inactiveButtonClass })) {
     submitButton.removeAttribute('disabled')
     submitButton.classList.add(activeButtonClass)
     submitButton.classList.remove(inactiveButtonClass)
@@ -71,11 +71,21 @@ function validateForm(form, { activeButtonClass, inactiveButtonClass, buttonElem
     //submitButton.setAttribute('disabled', true)
     //submitButton.classList.remove(activeButtonClass)
     //submitButton.classList.add(inactiveButtonClass)
-    disableButton(submitButton,{activeButtonClass,inactiveButtonClass})
+    disableButton(submitButton, { activeButtonClass, inactiveButtonClass })
   }
 
 }
 
 enableValidation(parameters);
+
+
+
+
+
+
+
+
+
+
 
 

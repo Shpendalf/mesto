@@ -58,8 +58,10 @@ const renderCards = () => readyCards.forEach(function (element) {
 const openPopup = (popup) => {
   popup.classList.add('popup_open');
   window.addEventListener('keydown', closeOnKeydown)
+  resetForm(popup, parameters);
   submitButtons.forEach((button) => {
-  disableButton(button,parameters)
+    disableButton(button, parameters)
+    
   })
 
 
@@ -67,6 +69,29 @@ const openPopup = (popup) => {
 const closePopup = (popup) => {
   popup.classList.remove('popup_open');
   window.removeEventListener('keydown', closeOnKeydown)
+  submitButtons.forEach((button) => {
+    disableButton(button, parameters)
+    
+  })
+}
+
+function resetForm(popup, parameters) {
+  const button = popup.querySelector(parameters.buttonElement);
+  const errors = Array.from(popup.querySelectorAll(parameters.inputErrorClass));
+  const inputs = Array.from(popup.querySelectorAll(parameters.formInput));
+
+  if (button) {
+    button.disabled = true;
+    button.classList.add(parameters.inactiveButtonClass);
+  }
+  errors.forEach((error) => {
+    error.classList.remove(parameters.inputErrorClassActive);
+    error.classList.remove(parameters.inputErrorClass)
+  })
+
+  inputs.forEach((input) => {
+    input.value = '';
+  })
 }
 
 const closeOnKeydown = (e) => {
@@ -79,7 +104,7 @@ function openBigImageHandler(e) {
   const text = e.target.closest('.card').querySelector('.card__title').textContent;
   openPopupImg(e.target.src, text);
 }
-function createCard(sourceValue, titleValue){
+function createCard(sourceValue, titleValue) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image')
   cardImage.src = sourceValue;
@@ -98,7 +123,7 @@ function createCard(sourceValue, titleValue){
   return cardElement
 }
 function renderCard(sourceValue, titleValue) {
-  const cardElement=createCard(sourceValue, titleValue)
+  const cardElement = createCard(sourceValue, titleValue)
 
   prependToContainer(cardsContainer, cardElement);
 }
@@ -106,7 +131,7 @@ function renderCard(sourceValue, titleValue) {
 function openProfilePopup() {
   openPopup(popupProfile);
 
-  //validateForm(formElementProfile, parameters)
+  //validateForm(formElementProfile)
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
@@ -115,7 +140,7 @@ function openProfilePopup() {
 
 function openPopupAdd(event) {
   openPopup(popupAddImg);
-  
+  // validateForm(formElementImg)
 }
 function openPopupImg(src, text) {
   openPopup(popupBigImage);
@@ -162,6 +187,4 @@ popupProfile.addEventListener('click', (popupProfile) => { closeOnclick(popupPro
 popupAddImg.addEventListener('click', (popupAddImg) => { closeOnclick(popupAddImg) })
 
 renderCards();
-
-
 
