@@ -7,12 +7,12 @@ const parameters = {
   inputErrorClass: 'popup__error',
   inputErrorClassActive: 'popup__error_active'
 }
-const showInputError = (errorElement) => {
+const showInputError = (errorElement,{inputErrorClass,inputErrorClassActive}) => {
   errorElement.classList.add(inputErrorClass);
   errorElement.classList.add(inputErrorClassActive);
 }
 
-const hideInputError = (errorElement) => {
+const hideInputError = (errorElement,{inputErrorClass,inputErrorClassActive}) => {
   errorElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(inputErrorClassActive)
   errorElement.textContent = ''
@@ -29,31 +29,32 @@ function validateInput(input) {
   }
 }
 
-const setEventListeners = function (form) {
+const setEventListeners =  (form,{formInput,buttonElement}) => {
   const inputList = Array.from(form.querySelectorAll(formInput))
+  const submitButton = form.querySelector(buttonElement);
   inputList.forEach(function (input) {
     input.addEventListener('input', function () {
       validateInput(input,config)
-      validateForm(form,config)
+      validateForm(form,submitButton)
     })
   })
 }
 
 const enableValidation = (config) => {
-  const {formElement, inactiveButtonClass, formInput, buttonElement, activeButtonClass, inputErrorClass, inputErrorClassActive}= config
+  const {formElement,...rest}= config
   const formList = Array.from(document.querySelectorAll(formElement))
-
+ 
   formList.forEach((form) => {
 
     form.addEventListener('submit', function (evt) {
       evt.preventDefault()
     })
-    setEventListeners(form,formInput,...rest)
+    setEventListeners(form,rest)
   })
 }
 
-function validateForm(form,{buttonElement,activeButtonClass,inactiveButtonClass}) {
-  const submitButton = form.querySelector(buttonElement);
+function validateForm(form,submitButton,{activeButtonClass,inactiveButtonClass}) {
+  
   if (form.checkValidity()) {
     submitButton.removeAttribute('disabled')
     submitButton.classList.add(activeButtonClass)
