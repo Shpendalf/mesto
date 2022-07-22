@@ -56,37 +56,34 @@ const renderCards = () => readyCards.forEach(function (element) {
 
 
 const openPopup = (popup) => {
+  resetForm(popup, parameters)
   popup.classList.add('popup_open');
   window.addEventListener('keydown', closeOnKeydown)
-  resetForm(popup, parameters);
-  submitButtons.forEach((button) => {
-    disableButton(button, parameters)
-    
-  })
+  //submitButtons.forEach((button) => {
+   // disableButton(button, parameters)
+ // })
 
 
 }
 const closePopup = (popup) => {
   popup.classList.remove('popup_open');
   window.removeEventListener('keydown', closeOnKeydown)
-  submitButtons.forEach((button) => {
-    disableButton(button, parameters)
-    
-  })
+  resetForm(popup, parameters);
 }
 
 function resetForm(popup, parameters) {
   const button = popup.querySelector(parameters.buttonElement);
-  const errors = Array.from(popup.querySelectorAll(parameters.inputErrorClass));
+  const errors = Array.from(popup.querySelectorAll(`.${parameters.inputErrorClass}`));
   const inputs = Array.from(popup.querySelectorAll(parameters.formInput));
 
   if (button) {
     button.disabled = true;
     button.classList.add(parameters.inactiveButtonClass);
   }
+
   errors.forEach((error) => {
     error.classList.remove(parameters.inputErrorClassActive);
-    error.classList.remove(parameters.inputErrorClass)
+    
   })
 
   inputs.forEach((input) => {
@@ -124,23 +121,18 @@ function createCard(sourceValue, titleValue) {
 }
 function renderCard(sourceValue, titleValue) {
   const cardElement = createCard(sourceValue, titleValue)
-
   prependToContainer(cardsContainer, cardElement);
 }
 
 function openProfilePopup() {
   openPopup(popupProfile);
-
-  //validateForm(formElementProfile)
+  
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-
-
 }
 
 function openPopupAdd(event) {
   openPopup(popupAddImg);
-  // validateForm(formElementImg)
 }
 function openPopupImg(src, text) {
   openPopup(popupBigImage);
@@ -174,7 +166,6 @@ function closeOnclick(e) {
   else { closePopup(e.currentTarget) }
 }
 
-
 formElementImg.addEventListener('submit', submitCard)
 formElementProfile.addEventListener('submit', changeProfile);
 profileButtonOpen.addEventListener('click', openProfilePopup)
@@ -187,4 +178,3 @@ popupProfile.addEventListener('click', (popupProfile) => { closeOnclick(popupPro
 popupAddImg.addEventListener('click', (popupAddImg) => { closeOnclick(popupAddImg) })
 
 renderCards();
-
