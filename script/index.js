@@ -1,4 +1,3 @@
-
 const profileButtonOpen = document.querySelector('.profile__edit-button')
 const popupClasses = document.querySelectorAll('.popup')
 const popupProfile = document.querySelector('.popup_profile')
@@ -19,6 +18,7 @@ const popupBigImage = document.querySelector('.popup_bigimage');
 const bigImageClose = document.querySelector('.popup__close-bigimg')
 const bigImage = popupBigImage.querySelector('.popup__image')
 const bigImageTitle = popupBigImage.querySelector('.popup__title')
+const submitButtons = document.querySelectorAll('.popup__button')
 const readyCards = [{
 
   name: 'Архыз',
@@ -58,6 +58,9 @@ const renderCards = () => readyCards.forEach(function (element) {
 const openPopup = (popup) => {
   popup.classList.add('popup_open');
   window.addEventListener('keydown', closeOnKeydown)
+  submitButtons.forEach((button) => {
+  disableButton(button,parameters)
+  })
 
 
 }
@@ -76,9 +79,7 @@ function openBigImageHandler(e) {
   const text = e.target.closest('.card').querySelector('.card__title').textContent;
   openPopupImg(e.target.src, text);
 }
-
-function renderCard(sourceValue, titleValue) {
-
+function createCard(sourceValue, titleValue){
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image')
   cardImage.src = sourceValue;
@@ -94,6 +95,10 @@ function renderCard(sourceValue, titleValue) {
   });
 
   cardImage.addEventListener('click', openBigImageHandler)
+  return cardElement
+}
+function renderCard(sourceValue, titleValue) {
+  const cardElement=createCard(sourceValue, titleValue)
 
   prependToContainer(cardsContainer, cardElement);
 }
@@ -101,7 +106,7 @@ function renderCard(sourceValue, titleValue) {
 function openProfilePopup() {
   openPopup(popupProfile);
 
-  validateForm(formElementProfile)
+  //validateForm(formElementProfile, parameters)
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
@@ -110,7 +115,7 @@ function openProfilePopup() {
 
 function openPopupAdd(event) {
   openPopup(popupAddImg);
-  validateForm(formElementImg)
+  
 }
 function openPopupImg(src, text) {
   openPopup(popupBigImage);
@@ -157,3 +162,6 @@ popupProfile.addEventListener('click', (popupProfile) => { closeOnclick(popupPro
 popupAddImg.addEventListener('click', (popupAddImg) => { closeOnclick(popupAddImg) })
 
 renderCards();
+
+
+
