@@ -173,11 +173,13 @@ formElementImg.addEventListener('submit', submitCard)
 formElementProfile.addEventListener('submit', changeProfile);
 profileButtonOpen.addEventListener('click', () => { 
   openProfilePopup(), 
-  resetForm(popup, parameters) 
+  resetForm(popupProfile, parameters) 
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
 })
 popupAddBtn.addEventListener('click', () => { 
-  openProfilePopup(), 
-  resetForm(popup, parameters) 
+  openPopupAdd(), 
+  resetForm(popupAddImg, parameters) 
 })
 profileButtonClose.addEventListener('click', () => { closePopup(popupProfile) })
 buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
