@@ -56,12 +56,12 @@ const renderCards = () => readyCards.forEach(function (element) {
 
 
 const openPopup = (popup) => {
-  resetForm(popup, parameters)
+ 
   popup.classList.add('popup_open');
   window.addEventListener('keydown', closeOnKeydown)
   //submitButtons.forEach((button) => {
-   // disableButton(button, parameters)
- // })
+  // disableButton(button, parameters)
+  // })
 
 
 }
@@ -80,12 +80,12 @@ function resetForm(popup, parameters) {
     button.classList.add(parameters.inactiveButtonClass);
     button.disabled = true;
     button.classList.remove(parameters.activeButtonClass)
-    
+
   }
 
   errors.forEach((error) => {
     error.classList.remove(parameters.inputErrorClassActive);
-    
+
   })
 
   inputs.forEach((input) => {
@@ -94,7 +94,7 @@ function resetForm(popup, parameters) {
 }
 
 const closeOnKeydown = (e) => {
-  
+
   if (e.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_open')
     closePopup(openedPopup)
@@ -129,7 +129,7 @@ function renderCard(sourceValue, titleValue) {
 
 function openProfilePopup() {
   openPopup(popupProfile);
-  
+
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
@@ -171,8 +171,14 @@ function closeOnclick(e) {
 
 formElementImg.addEventListener('submit', submitCard)
 formElementProfile.addEventListener('submit', changeProfile);
-profileButtonOpen.addEventListener('click', openProfilePopup,resetForm(profileButtonOpen, parameters))
-popupAddBtn.addEventListener('click', openPopupAdd,resetForm(popupAddBtn, parameters))
+profileButtonOpen.addEventListener('click', () => { 
+  openProfilePopup(), 
+  resetForm(popup, parameters) 
+})
+popupAddBtn.addEventListener('click', () => { 
+  openProfilePopup(), 
+  resetForm(popup, parameters) 
+})
 profileButtonClose.addEventListener('click', () => { closePopup(popupProfile) })
 buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
 bigImageClose.addEventListener('click', () => { closePopup(popupBigImage) })
