@@ -82,7 +82,27 @@ enableValidation(parameters);
 
 
 
+function resetForm(popup, parameters) {
+  const button = popup.querySelector(parameters.buttonElement);
+  const errors = Array.from(popup.querySelectorAll(`.${parameters.inputErrorClass}`));
+  const inputs = Array.from(popup.querySelectorAll(parameters.formInput));
 
+  if (button) {
+    button.classList.add(parameters.inactiveButtonClass);
+    button.disabled = true;
+    button.classList.remove(parameters.activeButtonClass)
+
+  }
+
+  errors.forEach((error) => {
+    error.classList.remove(parameters.inputErrorClassActive);
+
+  })
+
+  inputs.forEach((input) => {
+    input.value = '';
+  })
+}
 
 
 
