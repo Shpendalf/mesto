@@ -1,4 +1,5 @@
-import Card from "./card"
+import { Card } from "./card.js"
+import { parameters } from "./consts.js"
 
 
 const profileButtonOpen = document.querySelector('.profile__edit-button')
@@ -52,7 +53,7 @@ const readyCards = [{
 
 
 readyCards.forEach((item) =>{
-  const card = new Card (item,cardTemplate )
+  const card = new Card (item, )
   const renderCards = card.generateCard();
   cardsContainer.prepend(renderCards)
   
@@ -61,7 +62,7 @@ readyCards.forEach((item) =>{
 
 
 
-const openPopup = (popup) => {
+export const openPopup = (popup) => {
  
   popup.classList.add('popup_open');
   window.addEventListener('keydown', closeOnKeydown)

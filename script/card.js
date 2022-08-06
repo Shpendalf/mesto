@@ -1,29 +1,21 @@
+import { openPopup } from "./index.js";
 
 
-export const parameters = {
-    formElement: '.popup__form',
-    formInput: '.popup__textarea',
-    buttonElement: '.popup__button',
-    activeButtonClass: 'popup__button_valid',
-    inactiveButtonClass: 'popup__button_invalid',
-    inputErrorClass: 'popup__error',
-    inputErrorClassActive: 'popup__error_active'
-  }
 
-  export default class Card {
-    constructor(name, image, selector){
-      this._name = name;
-      this._image = image 
+  export class Card {
+    constructor(data, selector){
+      this._name = data.name;
+      this._image = data.image; 
+      this._alt = data.alt;
       this._selector = selector
     }
-    _getElement (){
-      const cardElement = 
-      document.querySelector(this._selector)
-      .content
-      .querySelector('.card')
-      .cloneNode('true'); 
-
-      this._element = cardElement;
+  	_getElement() {
+      const cardElement = document
+        .querySelector(this._selector)
+        .content
+        .querySelector(cardTemplate)
+        .cloneNode(true);
+      return cardElement;
     }
   _setEventListeners(){
     this._element.querySelector('.card__like-button').addEventListener('click',()=>{ this._likeToggle})
@@ -43,9 +35,12 @@ export const parameters = {
   }
   
   generateCard(){
-    this._element = this._getElement
-    this._image.src = this._link;
-    this._image.textContent = this._name.textContent
+    this._element = this._getElement();
+    this._setEventListeners();
+    this._image = this._element.querySelector('.card__image').src
+    this._title = this._element.querySelector('.card__title').textContent
+    this._alt = this._element.querySelector('.card__image').alt
+    title.textContent = this._name.textContent
      return this._element
   }
 
