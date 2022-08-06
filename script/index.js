@@ -76,11 +76,14 @@ readyCards.forEach(function(item){
   prependCard(card);
 
 })
- 
-
-
+function createCard (name,link){
+  name.value = document.querySelector('.card-title');
+  link.value = document.querySelector('.card-image').src
+}
+   
    function renderCard(){
-    const readyCard = new Card (data,'.card-template');
+   
+    const readyCard = new Card (createCard(name,link),'.card-template');
     const card = readyCard.generateCard();
     prependCard(card)
   }
@@ -167,12 +170,13 @@ function changeProfile(evt) {
 
 }
 
-const formImg = document.querySelector('.popup__textarea_link')
-const formText = document.querySelector('.popup__textarea_img-title')
+
 
 function submitCard(evt) {
+const formImg = document.querySelector('.popup__textarea_link')
+const formText = document.querySelector('.popup__textarea_img-title')
   evt.preventDefault();
-  renderCard();
+  renderCard(formText.value,formImg.value);
   closePopup(popupAddImg);
   formImg.value = '';
   formText.value = '';

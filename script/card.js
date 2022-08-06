@@ -17,6 +17,8 @@ import { bigImageTitle } from "./consts.js";
         .content
         .querySelector('.card')
         .cloneNode(true);
+        
+       
       return cardElement;
     }
     generateCard(){
