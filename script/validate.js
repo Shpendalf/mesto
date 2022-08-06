@@ -7,6 +7,8 @@ const parameters = {
   inputErrorClass: 'popup__error',
   inputErrorClassActive: 'popup__error_active'
 }
+
+
 const showInputError = (errorElement, { inputErrorClass, inputErrorClassActive }) => {
   errorElement.classList.add(inputErrorClass);
   errorElement.classList.add(inputErrorClassActive);

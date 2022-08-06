@@ -52,12 +52,9 @@ const readyCards = [{
 
 
 
-readyCards.forEach((item) =>{
-  const card = new Card (item, )
-  const renderCards = card.generateCard();
-  cardsContainer.prepend(renderCards)
-  
-})
+function prependCard(e){
+  cardsContainer.prepend(e)
+}
 
 
 
@@ -72,6 +69,14 @@ export const openPopup = (popup) => {
 
 
 }
+
+readyCards.forEach(function(item){
+  const readyCard = new Card(item,cardTemplate);
+  const cardElement= readyCard.generateCard();
+  prependCard(cardElement);
+
+
+})
 const closePopup = (popup) => {
   popup.classList.remove('popup_open');
   window.removeEventListener('keydown', closeOnKeydown)
@@ -107,10 +112,10 @@ const closeOnKeydown = (e) => {
     closePopup(openedPopup)
   }
 }
-function openBigImage(e) {
-  const text = e.target.closest('.card').querySelector('.card__title').textContent;
-  openPopupImg(e.target.src, text);
-}
+//function openBigImage(e) {
+  //const text = e.target.closest('.card').querySelector('.card__title').textContent;
+ // openPopupImg(e.target.src, text);
+//}
 //function createCard(sourceValue, titleValue) {
  // const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
  // const cardImage = cardElement.querySelector('.card__image')

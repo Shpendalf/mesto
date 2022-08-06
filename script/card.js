@@ -13,7 +13,7 @@ import { openPopup } from "./index.js";
       const cardElement = document
         .querySelector(this._selector)
         .content
-        .querySelector(cardTemplate)
+        .querySelector('.card-template')
         .cloneNode(true);
       return cardElement;
     }
