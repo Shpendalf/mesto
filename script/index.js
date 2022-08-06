@@ -72,11 +72,21 @@ export const openPopup = (popup) => {
 
 readyCards.forEach(function(item){
   const readyCard = new Card(item,'.card-template');
-  const cardElement= readyCard.generateCard();
-  prependCard(cardElement);
-
+  const card= readyCard.generateCard();
+  prependCard(card);
 
 })
+ 
+
+
+   function renderCard(){
+    const readyCard = new Card (data,'.card-template');
+    const card = readyCard.generateCard();
+    prependCard(card)
+  }
+   
+
+
 const closePopup = (popup) => {
   popup.classList.remove('popup_open');
   window.removeEventListener('keydown', closeOnKeydown)
@@ -112,16 +122,8 @@ const closeOnKeydown = (e) => {
     closePopup(openedPopup)
   }
 }
-//function openBigImage(e) {
-  //const text = e.target.closest('.card').querySelector('.card__title').textContent;
- // openPopupImg(e.target.src, text);
-//}
-//function createCard(sourceValue, titleValue) {
- // const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
- // const cardImage = cardElement.querySelector('.card__image')
- // cardImage.src = sourceValue;
-  //cardElement.querySelector('.card__title').textContent = titleValue
-  //cardImage.alt = titleValue;
+
+
 
   //cardElement.querySelector('.card__like-button').addEventListener('click', function (evt) {
    // evt.target.classList.toggle('card__like-button_toggle');
@@ -170,7 +172,7 @@ const formText = document.querySelector('.popup__textarea_img-title')
 
 function submitCard(evt) {
   evt.preventDefault();
-  renderCard(formImg.value, formText.value);
+  renderCard();
   closePopup(popupAddImg);
   formImg.value = '';
   formText.value = '';
@@ -199,5 +201,5 @@ bigImageClose.addEventListener('click', () => { closePopup(popupBigImage) })
 popupBigImage.addEventListener('click', closeOnclick)
 popupProfile.addEventListener('click', closeOnclick)
 popupAddImg.addEventListener('click', closeOnclick)
-renderCards();
+
 
