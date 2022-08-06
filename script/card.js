@@ -27,12 +27,11 @@ import { openPopup } from "./index.js";
        return this._element
     }
   _setEventListeners(){
-    this._element.querySelector('.card__like-button').addEventListener('click',()=>{ this._likeToggle})
+    this._element.querySelector('.card__like-button').addEventListener('click',()=>{ this._likeToggle()})
     this._element._querySelector('.card__delete').addEventListener('click', function () {
-      this._element.remove();
+      this._element.remove();})
       this._image.addEventListener('click',()=>{this._openBigImage})
-      })
-  }
+    }
   _likeToggle(){
     this._element.querySelector('.card__like-button').classList.toggle('.card__Like-button_toggle')
   }

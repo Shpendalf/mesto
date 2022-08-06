@@ -71,7 +71,7 @@ export const openPopup = (popup) => {
 }
 
 readyCards.forEach(function(item){
-  const readyCard = new Card(item,cardTemplate);
+  const readyCard = new Card(item,'.card-template');
   const cardElement= readyCard.generateCard();
   prependCard(cardElement);
 
