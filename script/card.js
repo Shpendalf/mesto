@@ -7,15 +7,24 @@ import { openPopup } from "./index.js";
       this._name = data.name;
       this._image = data.image; 
       this._alt = data.alt;
-      this._selector = selector
+      this._selector = selector;
     }
   	_getElement() {
       const cardElement = document
         .querySelector(this._selector)
         .content
-        .querySelector('.card-template')
+        .querySelector('.card')
         .cloneNode(true);
       return cardElement;
+    }
+    generateCard(){
+      this._element = this._getElement();
+      this._setEventListeners();
+      this._image = this._element.querySelector('.card__image').src
+      this._title = this._element.querySelector('.card__title').textContent
+      this._alt = this._element.querySelector('.card__image').alt
+      title.textContent = this._name.textContent
+       return this._element
     }
   _setEventListeners(){
     this._element.querySelector('.card__like-button').addEventListener('click',()=>{ this._likeToggle})
@@ -34,15 +43,7 @@ import { openPopup } from "./index.js";
   openPopup(popupBigImage);
   }
   
-  generateCard(){
-    this._element = this._getElement();
-    this._setEventListeners();
-    this._image = this._element.querySelector('.card__image').src
-    this._title = this._element.querySelector('.card__title').textContent
-    this._alt = this._element.querySelector('.card__image').alt
-    title.textContent = this._name.textContent
-     return this._element
-  }
+  
 
 
   }
