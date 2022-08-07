@@ -1,6 +1,6 @@
 import { Card } from "./card.js"
 import { parameters } from "./consts.js"
-import { Validate}  from "./validate.js"
+import  Validate  from "./validate.js"
 
 
 const profileButtonOpen = document.querySelector('.profile__edit-button')
@@ -53,7 +53,8 @@ const readyCards = [{
 
 const profileValidate = new Validate(parameters, formElementProfile);
 const imgValidate = new Validate(parameters, formElementImg);
-
+profileValidate.enableValidation();
+imgValidate.enableValidation();
 
 
 function prependCard(e){
@@ -212,5 +213,4 @@ popupBigImage.addEventListener('click', closeOnclick)
 popupProfile.addEventListener('click', closeOnclick)
 popupAddImg.addEventListener('click', closeOnclick)
 
-enableValidation(profileValidate);
-enableValidation(imgValidate);
+
