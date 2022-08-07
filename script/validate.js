@@ -1,110 +1,82 @@
-const parameters = {
-  formElement: '.popup__form',
-  formInput: '.popup__textarea',
-  buttonElement: '.popup__button',
-  activeButtonClass: 'popup__button_valid',
-  inactiveButtonClass: 'popup__button_invalid',
-  inputErrorClass: 'popup__error',
-  inputErrorClassActive: 'popup__error_active'
-}
+
+export class Validate{
+  constructor(parameters, validateForm){
+    this._parameters = parameters;
+    this._validateForm = validateForm;
+  }
+ 
 
 
-const showInputError = (errorElement, { inputErrorClass, inputErrorClassActive }) => {
+_showInputError(errorElement,  inputErrorClass, inputErrorClassActive ){
   errorElement.classList.add(inputErrorClass);
   errorElement.classList.add(inputErrorClassActive);
 }
 
-const hideInputError = (errorElement, { inputErrorClass, inputErrorClassActive }) => {
+ _hideInputError (errorElement,  inputErrorClass, inputErrorClassActive ){
   errorElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(inputErrorClassActive)
   errorElement.textContent = ''
 }
 
-function validateInput(input, rest) {
+_validateInput(input, parameters){
   const errorElement = input.parentNode.querySelector(`#${input.id}-error`)
   errorElement.textContent = input.validationMessage
 
   if (!input.validity.valid) {
-    showInputError(errorElement, rest)
+    _showInputError(errorElement, parameters)
   } else {
-    hideInputError(errorElement, rest)
+    _hideInputError(errorElement, parameters)
   }
 }
 
-const setEventListeners = function (form, { formInput, ...rest }) {
+_setEventListeners (form,  formInput, parameters) {
   const inputList = Array.from(form.querySelectorAll(formInput))
 
   inputList.forEach(function (input) {
     input.addEventListener('input', function () {
-      validateInput(input, rest)
-      validateForm(form, rest)
+      _validateInput(input, parameters)
+      _validateForm(form, parameters)
     })
   })
 }
 
-const enableValidation = (parameters) => {
-  const { formElement, ...rest } = parameters
-  const formList = Array.from(document.querySelectorAll(formElement))
+
+
+_disableButton(submitButton,  activeButtonClass, inactiveButtonClass ){
+  submitButton.setAttribute('disabled', true)
+  submitButton.classList.remove(activeButtonClass)
+  submitButton.classList.add(inactiveButtonClass)
+}
+
+_validateForm(form,  activeButtonClass, inactiveButtonClass, buttonElement ) {
+  console.log(form);
+  const submitButton = form.querySelector(buttonElement)
+
+  if (form.checkValidity(submitButton,  activeButtonClass, inactiveButtonClass )) {
+    submitButton.removeAttribute('disabled')
+    submitButton.classList.add(activeButtonClass)
+    //submitButton.classList.remove(inactiveButtonClass)
+  } else {
+     submitButton.classList.add(inactiveButtonClass)
+    _disableButton(submitButton,  activeButtonClass, inactiveButtonClass )
+  }
+ 
+}
+enableValidation(){
+  const parameters = this._parameters
+  const formList = Array.from(document.querySelectorAll(parameters.formElement))
 
   formList.forEach((form) => {
 
     form.addEventListener('submit', function (evt) {
       evt.preventDefault()
     })
-    setEventListeners(form, rest)
+    this._setEventListeners(this._validateForm, this._parameters)
   })
 }
-
-const disableButton = (submitButton, { activeButtonClass, inactiveButtonClass }) => {
-  submitButton.setAttribute('disabled', true)
-  submitButton.classList.remove(activeButtonClass)
-  submitButton.classList.add(inactiveButtonClass)
 }
 
-function validateForm(form, { activeButtonClass, inactiveButtonClass, buttonElement }) {
-  console.log(form);
-  const submitButton = form.querySelector(buttonElement)
 
-  if (form.checkValidity(submitButton, { activeButtonClass, inactiveButtonClass })) {
-    submitButton.removeAttribute('disabled')
-    submitButton.classList.add(activeButtonClass)
-    //submitButton.classList.remove(inactiveButtonClass)
-  } else {
-     submitButton.classList.add(inactiveButtonClass)
-    disableButton(submitButton, { activeButtonClass, inactiveButtonClass })
-  }
-
-}
-
-enableValidation(parameters);
-
-
-
-
-
-
-
-function resetForm(popup, parameters) {
-  const button = popup.querySelector(parameters.buttonElement);
-  const errors = Array.from(popup.querySelectorAll(`.${parameters.inputErrorClass}`));
-  const inputs = Array.from(popup.querySelectorAll(parameters.formInput));
-
-  if (button) {
-    button.classList.add(parameters.inactiveButtonClass);
-    button.disabled = true;
-    button.classList.remove(parameters.activeButtonClass)
-
-  }
-
-  errors.forEach((error) => {
-    error.classList.remove(parameters.inputErrorClassActive);
-
-  })
-
-  inputs.forEach((input) => {
-    input.value = '';
-  })
-}
 
 
 

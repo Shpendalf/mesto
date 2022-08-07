@@ -52,7 +52,7 @@ import { bigImageTitle } from "./consts.js";
  
   
   
-  
+
 
 
   }

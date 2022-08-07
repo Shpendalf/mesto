@@ -1,5 +1,6 @@
 import { Card } from "./card.js"
 import { parameters } from "./consts.js"
+import { Validate}  from "./validate.js"
 
 
 const profileButtonOpen = document.querySelector('.profile__edit-button')
@@ -50,6 +51,9 @@ const readyCards = [{
 }
 ];
 
+const profileValidate = new Validate(parameters, formElementProfile);
+const imgValidate = new Validate(parameters, formElementImg);
+
 
 
 function prependCard(e){
@@ -76,17 +80,27 @@ readyCards.forEach(function(item){
   prependCard(card);
 
 })
-function createCard (name,link){
-  name.value = document.querySelector('.card-title');
-  link.value = document.querySelector('.card-image').src
-}
+
+
+
+
+
+function createCard() {
+  const card = {
+      link: document.querySelector('.popup__textarea_link').value,
+      name: document.querySelector('.popup__textarea_img-title').value,
+  };
+  return card;
+};
+
+
+
+  // function renderCard(){
    
-   function renderCard(){
-   
-    const readyCard = new Card (createCard(name,link),'.card-template');
-    const card = readyCard.generateCard();
-    prependCard(card)
-  }
+    //const readyCard = new Card (createCard(),'.card-template');
+    //const card = readyCard.generateCard();
+    //prependCard(card)
+  //}
    
 
 
@@ -154,13 +168,7 @@ function openProfilePopup() {
 function openPopupAdd(event) {
   openPopup(popupAddImg);
 }
-function openPopupImg(src, text) {
-  openPopup(popupBigImage);
-  bigImage.src = src;
-  bigImage.alt = text;
-  bigImageTitle.textContent = text;
 
-}
 
 function changeProfile(evt) {
   evt.preventDefault();
@@ -172,14 +180,12 @@ function changeProfile(evt) {
 
 
 
-function submitCard(evt) {
-const formImg = document.querySelector('.popup__textarea_link')
-const formText = document.querySelector('.popup__textarea_img-title')
-  evt.preventDefault();
-  renderCard(formText.value,formImg.value);
-  closePopup(popupAddImg);
-  formImg.value = '';
-  formText.value = '';
+function submitCard() {
+
+  const card = new Card(createCard(), '.card-template');
+  const cardElement = card.generateCard();
+  prependCard(cardElement);
+  closePopup(popupAddImg)
 };
 
 function closeOnclick(e) {
@@ -206,4 +212,5 @@ popupBigImage.addEventListener('click', closeOnclick)
 popupProfile.addEventListener('click', closeOnclick)
 popupAddImg.addEventListener('click', closeOnclick)
 
-
+enableValidation(profileValidate);
+enableValidation(imgValidate);
