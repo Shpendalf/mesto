@@ -1,7 +1,7 @@
 export default class Validate{
-  constructor(parameters, validateForm){
+  constructor(parameters, checkForm){
     this._parameters = parameters;
-    this._validateForm = validateForm;
+    this._checkForm = checkForm;
   }
  
 
@@ -27,8 +27,8 @@ _showInputError(errorElement, ){
     this._hideInputError(errorElement,  parameters );
   }
 }
-_validateForm(form,  parameters) {
-  console.log(form);
+_validateForm(form,  parameters){
+
   const submitButton = form.querySelector(parameters.buttonElement)
 
   if (form.checkValidity(submitButton,  parameters )) {
@@ -41,7 +41,7 @@ _validateForm(form,  parameters) {
   }
  
 }
-_setEventListeners (form,   parameters) {
+_setEventListeners (form,  parameters) {
   const inputList = Array.from(form.querySelectorAll(parameters.formInput))
   inputList.forEach((input)=>{
      input.addEventListener('input',() => {
@@ -69,7 +69,7 @@ enableValidation(){
     form.addEventListener('submit', function (evt) {
       evt.preventDefault()
     })
-    this._setEventListeners(this._validateForm, this._parameters)
+    this._setEventListeners(this._checkForm, this._parameters)
    
   })
 }
