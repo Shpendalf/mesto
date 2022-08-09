@@ -4,12 +4,9 @@
     line-height: 14.52px;
     opacity: 0;
     width: 358px;
-    
     border-top: 1px solid red;
-    height:27px
+    height: 27px;
  
-
-
 }
 
 @media screen and (max-width:600px) {
