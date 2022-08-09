@@ -171,8 +171,9 @@ function submitCard(evt) {
   const createdCard = constructCard(card)
   evt.preventDefault()
   prependCard(createdCard);
-  closePopup(popupAddImg)
- 
+  
+  closePopup(popupAddImg);
+  
 };
 
 

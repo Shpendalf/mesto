@@ -3,24 +3,36 @@ export default class FormValidator{
     this._parameters = parameters;
     this._checkForm = checkForm;
   }
+
+
 _toggleButtonState(button, isActive,) {
   if (isActive) {
     
-      button.disabled = false;
-      button.classList.add(this._parameters.activeButtonClass)
-      button.classList.remove(this._parameters.inactiveButtonClass)
+    this._activeButton()
   } else {
-      button.disabled = true;
-      button.classList.add(this._parameters.inactiveButtonClass)
-      button.classList.remove(this._parameters.activeButtonClass)
+    this._inactiveButton()
   }
 }
 
-resetForm( ){
+_activeButton(){
+    this._submitButton.disabled = false;
+    this._submitButton.classList.add(this._parameters.activeButtonClass)
+    this._submitButton.classList.remove(this._parameters.inactiveButtonClass)
+}
+_inactiveButton(){
+    this._submitButton.disabled = true;
+    this._submitButton.classList.add(this._parameters.inactiveButtonClass)
+    this._submitButton.classList.remove(this._parameters.activeButtonClass)
+}
+
+resetForm(){
+
+    this._inactiveButton()
     
+      
   this._inputList.forEach((input) => {
     const errorElement = this._checkForm.querySelector(`#${input.id}-error`);
-    this._hideInputError(errorElement,  )
+    this._hideInputError(errorElement)
     input.value = '';
   })
 
@@ -39,7 +51,7 @@ _showInputError(errorElement, ){
  _validateInput(input, ){
   const errorElement = this._checkForm.querySelector(`#${input.id}-error`);
   errorElement.textContent = input.validationMessage;
-
+  
   if (!input.validity.valid) {
     this._showInputError(errorElement,  );
   } else {
@@ -63,12 +75,12 @@ _showInputError(errorElement, ){
 
 _setEventListeners ( ) {
   this._inputList = Array.from(this._checkForm.querySelectorAll(this._parameters.formInput))
-  const submitButton = this._checkForm.querySelector(this._parameters.buttonElement)
+  this._submitButton = this._checkForm.querySelector(this._parameters.buttonElement)
   this._inputList.forEach((input)=>{
      input.addEventListener('input',() => {
      this._validateInput(input);
     // this._validateForm(form, this._parameters);
-     this._toggleButtonState(submitButton, this._checkForm.checkValidity());
+     this._toggleButtonState(this._submitButton, this._checkForm.checkValidity());
     })
   })
 }
