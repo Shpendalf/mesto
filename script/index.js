@@ -1,6 +1,6 @@
 import { Card } from "./card.js"
 import { parameters } from "./consts.js"
-import  Validate  from "./validate.js"
+import  FormValidator  from "./validate.js"
 
 
 const profileButtonOpen = document.querySelector('.profile__edit-button')
@@ -24,6 +24,9 @@ const bigImageClose = document.querySelector('.popup__close-bigimg')
 const bigImage = popupBigImage.querySelector('.popup__image')
 const bigImageTitle = popupBigImage.querySelector('.popup__title')
 const submitButtons = document.querySelectorAll('.popup__button')
+const formTitle = document.querySelector('.popup__textarea_img-title')
+const formLink = document.querySelector('.popup__textarea_link')
+ 
 const readyCards = [{
 
   name: 'Архыз',
@@ -51,8 +54,8 @@ const readyCards = [{
 }
 ];
 
-const profileValidate = new Validate(parameters, formElementProfile);
-const imgValidate = new Validate(parameters, formElementImg);
+const profileValidate = new FormValidator(parameters, formElementProfile);
+const imgValidate = new FormValidator(parameters, formElementImg);
 profileValidate.enableValidation();
 imgValidate.enableValidation();
 
@@ -67,32 +70,38 @@ function prependCard(e){
 export const openPopup = (popup) => {
  
   popup.classList.add('popup_open');
-  window.addEventListener('keydown', closeOnKeydown)
+  document.addEventListener('keydown', closeOnKeydown)
   //submitButtons.forEach((button) => {
   // disableButton(button, parameters)
   // })
 
 
 }
-
-readyCards.forEach(function(item){
+ 
+function constructCard(item){
   const readyCard = new Card(item,'.card-template');
   const card= readyCard.generateCard();
-  prependCard(card);
+  return card;
+  }
+
+readyCards.forEach(function(item){
+  const i = constructCard(item)
+  prependCard(i);
 
 })
-
-
-
-
-
 function createCard() {
   const card = {
-      link: document.querySelector('.popup__textarea_link').value,
-      name: document.querySelector('.popup__textarea_img-title').value,
+      link:formLink.value,
+      
+      name:formTitle.value,
   };
   return card;
 };
+
+
+
+
+
 
 
 
@@ -161,9 +170,10 @@ const closeOnKeydown = (e) => {
 
 function openProfilePopup() {
   openPopup(popupProfile);
-
+  
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  
 }
 
 function openPopupAdd(event) {
@@ -172,22 +182,23 @@ function openPopupAdd(event) {
 
 
 function changeProfile(evt) {
-  evt.preventDefault();
+  evt.preventDefault()
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupProfile)
-
+ 
 }
-
-
-
 function submitCard() {
+  const i = createCard()
+  const e = constructCard(i)
 
-  const card = new Card(createCard(), '.card-template');
-  const cardElement = card.generateCard();
-  prependCard(cardElement);
+  prependCard(e);
   closePopup(popupAddImg)
+ 
 };
+
+
+
 
 function closeOnclick(e) {
   if (e.target !== e.currentTarget) return;
@@ -197,16 +208,17 @@ function closeOnclick(e) {
 formElementImg.addEventListener('submit', submitCard)
 formElementProfile.addEventListener('submit', changeProfile);
 profileButtonOpen.addEventListener('click', () => { 
-  openProfilePopup(), 
-  resetForm(popupProfile, parameters) 
+  openProfilePopup()
+ 
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+   
 })
 popupAddBtn.addEventListener('click', () => { 
-  openPopupAdd(), 
+  openPopupAdd() 
   resetForm(popupAddImg, parameters) 
 })
-profileButtonClose.addEventListener('click', () => { closePopup(popupProfile) })
+profileButtonClose.addEventListener('click', () => { closePopup(popupProfile), resetForm(popupProfile, parameters) })
 buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
 bigImageClose.addEventListener('click', () => { closePopup(popupBigImage) })
 popupBigImage.addEventListener('click', closeOnclick)
