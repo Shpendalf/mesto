@@ -1,6 +1,6 @@
 import { Card } from "./card.js"
 import { parameters } from "./consts.js"
-import  FormValidator  from "./validate.js"
+import  FormValidator  from "./FormValidator.js"
 
 
 const profileButtonOpen = document.querySelector('.profile__edit-button')
@@ -116,30 +116,8 @@ function createCard() {
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_open');
-  window.removeEventListener('keydown', closeOnKeydown)
+  document.removeEventListener('keydown', closeOnKeydown)
 
-}
-
-function resetForm(popup, parameters) {
-  const button = popup.querySelector(parameters.buttonElement);
-  const errors = Array.from(popup.querySelectorAll(`.${parameters.inputErrorClass}`));
-  const inputs = Array.from(popup.querySelectorAll(parameters.formInput));
-
-  if (button) {
-    button.classList.add(parameters.inactiveButtonClass);
-    button.disabled = true;
-    button.classList.remove(parameters.activeButtonClass)
-
-  }
-
-  errors.forEach((error) => {
-    error.classList.remove(parameters.inputErrorClassActive);
-
-  })
-
-  inputs.forEach((input) => {
-    input.value = '';
-  })
 }
 
 const closeOnKeydown = (e) => {
@@ -188,11 +166,11 @@ function changeProfile(evt) {
   closePopup(popupProfile)
  
 }
-function submitCard() {
-  const i = createCard()
-  const e = constructCard(i)
-
-  prependCard(e);
+function submitCard(evt) {
+  const card = createCard()
+  const createdCard = constructCard(card)
+  evt.preventDefault()
+  prependCard(createdCard);
   closePopup(popupAddImg)
  
 };
@@ -215,10 +193,11 @@ profileButtonOpen.addEventListener('click', () => {
    
 })
 popupAddBtn.addEventListener('click', () => { 
-  openPopupAdd() 
-  resetForm(popupAddImg, parameters) 
+  openPopupAdd(), 
+  imgValidate.resetForm()
+  
 })
-profileButtonClose.addEventListener('click', () => { closePopup(popupProfile), resetForm(popupProfile, parameters) })
+profileButtonClose.addEventListener('click', () => { closePopup(popupProfile),profileValidate.resetForm() })
 buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
 bigImageClose.addEventListener('click', () => { closePopup(popupBigImage) })
 popupBigImage.addEventListener('click', closeOnclick)

@@ -23,9 +23,9 @@ export class Card {
 
   generateCard() {
     this._element = this._getElement();
-    
-    this._element.querySelector('.card__image').src = this._image
-    this._element.querySelector('.card__image').alt = this._name
+    this._cardImage =this._element.querySelector('.card__image')
+    this._cardImage.src = this._image
+    this._cardImage.alt = this._name
     this._element.querySelector('.card__title').textContent = this._name
     this._setEventListeners();
 
@@ -36,14 +36,14 @@ export class Card {
   _openBigImage() {
     bigImage.src = this._image
     bigImageTitle.textContent = this._name
+    bigImage.alt = this._name
     openPopup(popupBigImage);
   }
   _setEventListeners() {
     this._likeButton = this._element.querySelector('.card__like-button')
     this._likeButton.addEventListener('click', () => { this._likeToggle(); })
-
     this._element.querySelector('.card__delete').addEventListener('click', () => { this._deleteCard(); })
-    this._element.querySelector('.card__image').addEventListener('click', () => { this._openBigImage(); })
+    this._cardImage.addEventListener('click', () => { this._openBigImage(); })
   }
   _likeToggle() {
     this._likeButton.classList.toggle('card__like-button_toggle')

@@ -17,14 +17,16 @@ _toggleButtonState(button, isActive,) {
 }
 
 resetForm( ){
-  
+    
   this._inputList.forEach((input) => {
+    const errorElement = this._checkForm.querySelector(`#${input.id}-error`);
+    this._hideInputError(errorElement,  )
     input.value = '';
   })
 
 }
 _showInputError(errorElement, ){
-  
+
   errorElement.classList.add(this._parameters.inputErrorClassActive);
 }
 
@@ -64,9 +66,9 @@ _setEventListeners ( ) {
   const submitButton = this._checkForm.querySelector(this._parameters.buttonElement)
   this._inputList.forEach((input)=>{
      input.addEventListener('input',() => {
-     this._validateInput(input, this._parameters);
+     this._validateInput(input);
     // this._validateForm(form, this._parameters);
-     this._toggleButtonState(submitButton, this._checkForm.checkValidity(),this._parameters);
+     this._toggleButtonState(submitButton, this._checkForm.checkValidity());
     })
   })
 }
