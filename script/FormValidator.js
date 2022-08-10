@@ -5,8 +5,8 @@ export default class FormValidator{
   }
 
 
-_toggleButtonState(button, isActive,) {
-  if (isActive) {
+_toggleButtonState() {
+  if (this._checkForm.checkValidity()) {
     
     this._activeButton()
   } else {
@@ -33,7 +33,7 @@ resetForm(){
   this._inputList.forEach((input) => {
     const errorElement = this._checkForm.querySelector(`#${input.id}-error`);
     this._hideInputError(errorElement)
-    input.value = '';
+    
   })
 
 }
@@ -80,7 +80,7 @@ _setEventListeners ( ) {
      input.addEventListener('input',() => {
      this._validateInput(input);
     // this._validateForm(form, this._parameters);
-     this._toggleButtonState(this._submitButton, this._checkForm.checkValidity());
+     this._toggleButtonState();
     })
   })
 }

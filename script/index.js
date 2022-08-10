@@ -196,7 +196,9 @@ profileButtonOpen.addEventListener('click', () => {
 popupAddBtn.addEventListener('click', () => { 
   openPopupAdd(), 
   imgValidate.resetForm()
-  
+  formLink.value ='',
+      
+  formTitle.value= ''
 })
 profileButtonClose.addEventListener('click', () => { closePopup(popupProfile),profileValidate.resetForm() })
 buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
