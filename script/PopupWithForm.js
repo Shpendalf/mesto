@@ -17,14 +17,12 @@ _getInputValues(){
     return this._values;
 }
 
-openPopup(){
-    this._formElement.reset();
-    super.openPopup()
-}
+
 closePopup(){
    
-    
     super.closePopup();
+    
+    this._formElement.reset();
 }
 
 setEventListeners(){

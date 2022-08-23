@@ -57,7 +57,7 @@ const readyCards = [{
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
 }
 ];
-const profile = new UserInfo ('profile__name', 'profile__status')
+const profile = new UserInfo ('.profile__name', '.profile__status')
 const profileValidate = new FormValidator(parameters, formElementProfile);
 const imgValidate = new FormValidator(parameters, formElementImg);
 profileValidate.enableValidation();
@@ -68,9 +68,9 @@ const picPopup = new PopupWithImage (popupBigImage);
 const popupProfileCallback = (target) =>{
   profile.setUserInfo(target)
 }
-const popupImgCallback =(data) =>{
+function popupImgCallback (data){
   renderer(data)
- 
+ console.log(data)
 }
 
 
@@ -101,7 +101,7 @@ cardsHolder.renderItems();
 export const openPopup = (popup) => {
  
   popup.classList.add('popup_open');
-  document.addEventListener('keydown', closeOnKeydown)
+  //document.addEventListener('keydown', closeOnKeydown)
   //submitButtons.forEach((button) => {
   // disableButton(button, parameters)
   // })
@@ -147,13 +147,13 @@ function createCard() {
 
 //}
 
-const closeOnKeydown = (e) => {
+//const closeOnKeydown = (e) => {
 
-  if (e.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_open')
-    closePopup(openedPopup)
-  }
-}
+  //if (e.key === 'Escape') {
+    //const openedPopup = document.querySelector('.popup_open')
+    //closePopup(openedPopup)
+  //}
+//}
 
 
 
@@ -186,13 +186,13 @@ function openPopupAdd(event) {
 }
 
 
-function changeProfile(evt) {
-  evt.preventDefault()
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(popupProfile)
+//function changeProfile(evt) {
+  //evt.preventDefault()
+  //profileName.textContent = nameInput.value;
+  //profileJob.textContent = jobInput.value;
+  //closePopup(popupProfile)
  
-}
+//}
 //function submitCard(evt) {
   //const card = createCard()
   //const createdCard = constructCard(card)
@@ -206,32 +206,29 @@ function changeProfile(evt) {
 
 
 
-function closeOnclick(e) {
-  if (e.target !== e.currentTarget) return;
-  else { closePopup(e.currentTarget) }
-}
+
 
 //formElementImg.addEventListener('submit', submitCard)
 //formElementProfile.addEventListener('submit', changeProfile);
-profileButtonOpen.addEventListener('click', () => { 
-  openProfilePopup()
+//profileButtonOpen.addEventListener('click', () => { 
+  //openProfilePopup()
  
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  //nameInput.value = profileName.textContent;
+  //jobInput.value = profileJob.textContent;
    
-})
-popupAddBtn.addEventListener('click', () => { 
-  openPopupAdd(), 
-  imgValidate.resetForm()
-  formLink.value ='',
+//})
+//popupAddBtn.addEventListener('click', () => { 
+  //openPopupAdd(), 
+  //imgValidate.resetForm()
+  //formLink.value ='',
       
-  formTitle.value= ''
-})
+  //formTitle.value= ''
+//})
 //profileButtonClose.addEventListener('click', () => { closePopup(popupProfile),profileValidate.resetForm() })
-buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
+//buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
 //bigImageClose.addEventListener('click', () => { closePopup(popupBigImage) })
 //popupBigImage.addEventListener('click', closeOnclick)
-popupProfile.addEventListener('click', closeOnclick)
-popupAddImg.addEventListener('click', closeOnclick)
+//popupProfile.addEventListener('click', closeOnclick)
+//popupAddImg.addEventListener('click', closeOnclick)
 
 
