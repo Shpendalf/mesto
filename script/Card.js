@@ -10,7 +10,7 @@ export class Card {
     this._image = data.link;
     
     this._selector = selector;
-    console.log(this._openPopupImage)
+    
   }
 
   _getElement() {

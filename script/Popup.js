@@ -31,7 +31,7 @@ export default class Popup{
     }
 
      closePopup  () {
-      console.log(this._selector)
+     
         this._selector.classList.remove('popup_open')
         document.removeEventListener('keydown',this._closeOnKeydown)
      }

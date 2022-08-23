@@ -57,7 +57,7 @@ const readyCards = [{
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
 }
 ];
-const profile = new UserInfo ('.profile__name', '.profile__status')
+const profile = new UserInfo ('profile__name', 'profile__status')
 const profileValidate = new FormValidator(parameters, formElementProfile);
 const imgValidate = new FormValidator(parameters, formElementImg);
 profileValidate.enableValidation();
@@ -68,8 +68,9 @@ const picPopup = new PopupWithImage (popupBigImage);
 const popupProfileCallback = (target) =>{
   profile.setUserInfo(target)
 }
-const popupImgCallback =() =>{
+const popupImgCallback =(data) =>{
   renderer(data)
+ 
 }
 
 
@@ -91,6 +92,7 @@ function constructCard(item){
 function renderer(item){
   const generatedCard = constructCard(item);
   cardsHolder.setItem(generatedCard);
+  console.log(item)
 }
 
 const cardsHolder = new Section({data:readyCards,renderer },'.elements') ;
@@ -119,7 +121,7 @@ function createCard() {
       link:formLink.value,
       
       name:formTitle.value,
-  };
+  }
   return card;
 };
 
@@ -191,15 +193,15 @@ function changeProfile(evt) {
   closePopup(popupProfile)
  
 }
-function submitCard(evt) {
-  const card = createCard()
-  const createdCard = constructCard(card)
-  evt.preventDefault()
-  prependCard(createdCard);
+//function submitCard(evt) {
+  //const card = createCard()
+  //const createdCard = constructCard(card)
+  //evt.preventDefault()
+  //prependCard(createdCard);
   
-  closePopup(popupAddImg);
-  
-};
+  //closePopup(popupAddImg);
+//  
+//};
 
 
 
@@ -209,7 +211,7 @@ function closeOnclick(e) {
   else { closePopup(e.currentTarget) }
 }
 
-formElementImg.addEventListener('submit', submitCard)
+//formElementImg.addEventListener('submit', submitCard)
 //formElementProfile.addEventListener('submit', changeProfile);
 profileButtonOpen.addEventListener('click', () => { 
   openProfilePopup()
@@ -225,7 +227,7 @@ popupAddBtn.addEventListener('click', () => {
       
   formTitle.value= ''
 })
-profileButtonClose.addEventListener('click', () => { closePopup(popupProfile),profileValidate.resetForm() })
+//profileButtonClose.addEventListener('click', () => { closePopup(popupProfile),profileValidate.resetForm() })
 buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
 //bigImageClose.addEventListener('click', () => { closePopup(popupBigImage) })
 //popupBigImage.addEventListener('click', closeOnclick)
