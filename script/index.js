@@ -57,7 +57,7 @@ const readyCards = [{
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
 }
 ];
-const profile = new UserInfo ('.profile__name', '.profile__status')
+const profile = new UserInfo ('.profile__name' , '.profile__status')
 const profileValidate = new FormValidator(parameters, formElementProfile);
 const imgValidate = new FormValidator(parameters, formElementImg);
 profileValidate.enableValidation();
@@ -66,24 +66,45 @@ imgValidate.enableValidation();
 const picPopup = new PopupWithImage (popupBigImage);
 
 const popupProfileCallback = (target) =>{
+  console.log(target)
   profile.setUserInfo(target)
+ 
 }
-function popupImgCallback (data){
+const popupImgCallback =(data) =>{
+  console.log(data)
   renderer(data)
- console.log(data)
+  console.trace()
 }
 
 
 const newProfilePopup = new PopupWithForm({popupCallback:popupProfileCallback,selector:'.popup_profile'});
 const newImgPopup= new PopupWithForm({popupCallback:popupImgCallback,selector:'.popup_img'});
-newProfilePopup._getInputValues();
-newImgPopup._getInputValues();
+profileButtonOpen.addEventListener('click', ()=> {
+  profileValidate.resetForm()
+  
+  nameInput.value = profileName.textContent;
+   jobInput.value = profileJob.textContent;
+    newProfilePopup.openPopup()
+    })
+
+profileButtonClose.addEventListener('click',()=> newProfilePopup.closePopup())
+
+popupAddBtn.addEventListener('click',() => {
+  imgValidate.resetForm()
+  formLink.value ='',
+      
+  formTitle.value= ''
+  newImgPopup.openPopup()})
+
+buttonAddImgClose.addEventListener('click',() =>{newImgPopup.closePopup()
+})
+
 newProfilePopup.setEventListeners()
 newImgPopup.setEventListeners()
-//function prependCard(e){
-  //cardsContainer.prepend(e)
-//}
+
 picPopup.setEventListeners()
+
+
 function constructCard(item){
   const readyCard = new Card(item,'.card-template',picPopup.openPopup.bind(picPopup));
   const card= readyCard.generateCard();
@@ -92,22 +113,21 @@ function constructCard(item){
 function renderer(item){
   const generatedCard = constructCard(item);
   cardsHolder.setItem(generatedCard);
-  console.log(item)
 }
 
 const cardsHolder = new Section({data:readyCards,renderer },'.elements') ;
 cardsHolder.renderItems();
 
-export const openPopup = (popup) => {
+//openPopup = (popup) => {
  
-  popup.classList.add('popup_open');
+  //popup.classList.add('popup_open');
   //document.addEventListener('keydown', closeOnKeydown)
   //submitButtons.forEach((button) => {
   // disableButton(button, parameters)
   // })
 
 
-}
+//}
  
 
 
@@ -116,29 +136,22 @@ export const openPopup = (popup) => {
   //prependCard(i);
 
 //})
-function createCard() {
-  const card = {
-      link:formLink.value,
+//function createCard() {
+  //const card = {
+    //  link:formLink.value,
       
-      name:formTitle.value,
-  }
-  return card;
-};
+     // name:formTitle.value,
+ // }
+ // return card;
+//};
 
-
-
-
-
-
-
-
-  // function renderCard(){
+// function renderCard(){
    
     //const readyCard = new Card (createCard(),'.card-template');
     //const card = readyCard.generateCard();
     //prependCard(card)
   //}
-   
+
 
 
 //const closePopup = (popup) => {
@@ -173,17 +186,17 @@ function createCard() {
  // prependToContainer(cardsContainer, cardElement);
 //}
 
-function openProfilePopup() {
-  openPopup(popupProfile);
+//function openProfilePopup() {
+  //openPopup(popupProfile);
   
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+ // nameInput.value = profileName.textContent;
+  //jobInput.value = profileJob.textContent;
   
-}
+//}
 
-function openPopupAdd(event) {
-  openPopup(popupAddImg);
-}
+//function openPopupAdd(event) {
+  //openPopup(popupAddImg);
+//}
 
 
 //function changeProfile(evt) {
@@ -204,21 +217,22 @@ function openPopupAdd(event) {
 //};
 
 
-
-
-
+//function closeOnclick(e) {
+  //if (e.target !== e.currentTarget) return;
+  //else { closePopup(e.currentTarget) }
+//}
 
 //formElementImg.addEventListener('submit', submitCard)
 //formElementProfile.addEventListener('submit', changeProfile);
 //profileButtonOpen.addEventListener('click', () => { 
   //openProfilePopup()
  
-  //nameInput.value = profileName.textContent;
-  //jobInput.value = profileJob.textContent;
+//  nameInput.value = profileName.textContent;
+ // jobInput.value = profileJob.textContent;
    
 //})
 //popupAddBtn.addEventListener('click', () => { 
-  //openPopupAdd(), 
+ // openPopupAdd(), 
   //imgValidate.resetForm()
   //formLink.value ='',
       

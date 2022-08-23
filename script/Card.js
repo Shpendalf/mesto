@@ -1,4 +1,4 @@
-import { openPopup } from "./index.js";
+//import { openPopup } from "./index.js";
 import { bigImage, popupBigImage } from './consts.js';
 import { bigImageTitle } from "./consts.js";
 

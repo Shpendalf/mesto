@@ -5,7 +5,7 @@ export default class FormValidator{
   }
 
 
-_toggleButtonState() {
+toggleButtonState() {
   if (this._checkForm.checkValidity()) {
     
     this._activeButton()
@@ -80,7 +80,7 @@ _setEventListeners ( ) {
      input.addEventListener('input',() => {
      this._validateInput(input);
     // this._validateForm(form, this._parameters);
-     this._toggleButtonState();
+     this.toggleButtonState();
     })
   })
 }

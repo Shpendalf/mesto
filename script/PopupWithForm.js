@@ -16,17 +16,23 @@ _getInputValues(){
     
     return this._values;
 }
-
+openPopup(){
+    super.openPopup();
+    
+}
 
 closePopup(){
    
-    super.closePopup();
     
-    this._formElement.reset();
+    
+    
+    super.closePopup();
+     
 }
 
 setEventListeners(){
     super.setEventListeners();
+    
     this._formElement = this._selector.querySelector(".popup__form");
     this._formElement.addEventListener('submit',(e) => {
         e.preventDefault();
