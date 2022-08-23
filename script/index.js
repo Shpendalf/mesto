@@ -1,10 +1,14 @@
+import PopupWithForm from "./PopupWithForm.js"
 import { Card } from "./Card.js"
 import { parameters } from "./consts.js"
 import  FormValidator  from "./FormValidator.js"
+import PopupWithImage from "./PopupWithImage.js"
+import UserInfo from "./UserInfo.js"
 
-
+import Section from './Section.js'
 const profileButtonOpen = document.querySelector('.profile__edit-button')
 const popupClasses = document.querySelectorAll('.popup')
+const popupClass = document.querySelector('.popup')
 const popupProfile = document.querySelector('.popup_profile')
 const popupAddImg = document.querySelector('.popup_img')
 const profileButtonClose = document.querySelector('.popup__close-profile')
@@ -19,14 +23,14 @@ const buttonAddImgClose = document.querySelector('.popup__close-img');
 const container = document.querySelector('.main');
 const cardsContainer = container.querySelector('.elements');
 const cardTemplate = document.querySelector('.card-template');
-const popupBigImage = document.querySelector('.popup_bigimage');
+const popupBigImage = ('.popup_bigimage');
 const bigImageClose = document.querySelector('.popup__close-bigimg')
-const bigImage = popupBigImage.querySelector('.popup__image')
-const bigImageTitle = popupBigImage.querySelector('.popup__title')
+//const bigImage = popupBigImage.querySelector('.popup__image')
+//const bigImageTitle = popupBigImage.querySelector('.popup__title')
 const submitButtons = document.querySelectorAll('.popup__button')
 const formTitle = document.querySelector('.popup__textarea_img-title')
 const formLink = document.querySelector('.popup__textarea_link')
- 
+
 const readyCards = [{
 
   name: 'Архыз',
@@ -53,19 +57,44 @@ const readyCards = [{
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
 }
 ];
-
+const profile = new UserInfo ('.profile__name', '.profile__status')
 const profileValidate = new FormValidator(parameters, formElementProfile);
 const imgValidate = new FormValidator(parameters, formElementImg);
 profileValidate.enableValidation();
 imgValidate.enableValidation();
 
+const picPopup = new PopupWithImage (popupBigImage);
 
-function prependCard(e){
-  cardsContainer.prepend(e)
+const popupProfileCallback = (target) =>{
+  profile.setUserInfo(target)
+}
+const popupImgCallback =() =>{
+  renderer(data)
 }
 
 
+const newProfilePopup = new PopupWithForm({popupCallback:popupProfileCallback,selector:'.popup_profile'});
+const newImgPopup= new PopupWithForm({popupCallback:popupImgCallback,selector:'.popup_img'});
+newProfilePopup._getInputValues();
+newImgPopup._getInputValues();
+newProfilePopup.setEventListeners()
+newImgPopup.setEventListeners()
+//function prependCard(e){
+  //cardsContainer.prepend(e)
+//}
+picPopup.setEventListeners()
+function constructCard(item){
+  const readyCard = new Card(item,'.card-template',picPopup.openPopup.bind(picPopup));
+  const card= readyCard.generateCard();
+  return card;
+  }
+function renderer(item){
+  const generatedCard = constructCard(item);
+  cardsHolder.setItem(generatedCard);
+}
 
+const cardsHolder = new Section({data:readyCards,renderer },'.elements') ;
+cardsHolder.renderItems();
 
 export const openPopup = (popup) => {
  
@@ -78,17 +107,13 @@ export const openPopup = (popup) => {
 
 }
  
-function constructCard(item){
-  const readyCard = new Card(item,'.card-template');
-  const card= readyCard.generateCard();
-  return card;
-  }
 
-readyCards.forEach(function(item){
-  const i = constructCard(item)
-  prependCard(i);
 
-})
+//readyCards.forEach(function(item){
+  //const i = constructCard(item)
+  //prependCard(i);
+
+//})
 function createCard() {
   const card = {
       link:formLink.value,
@@ -114,11 +139,11 @@ function createCard() {
    
 
 
-const closePopup = (popup) => {
-  popup.classList.remove('popup_open');
-  document.removeEventListener('keydown', closeOnKeydown)
+//const closePopup = (popup) => {
+  //popup.classList.remove('popup_open');
+  //document.removeEventListener('keydown', closeOnKeydown)
 
-}
+//}
 
 const closeOnKeydown = (e) => {
 
@@ -185,7 +210,7 @@ function closeOnclick(e) {
 }
 
 formElementImg.addEventListener('submit', submitCard)
-formElementProfile.addEventListener('submit', changeProfile);
+//formElementProfile.addEventListener('submit', changeProfile);
 profileButtonOpen.addEventListener('click', () => { 
   openProfilePopup()
  
@@ -202,8 +227,8 @@ popupAddBtn.addEventListener('click', () => {
 })
 profileButtonClose.addEventListener('click', () => { closePopup(popupProfile),profileValidate.resetForm() })
 buttonAddImgClose.addEventListener('click', () => { closePopup(popupAddImg) })
-bigImageClose.addEventListener('click', () => { closePopup(popupBigImage) })
-popupBigImage.addEventListener('click', closeOnclick)
+//bigImageClose.addEventListener('click', () => { closePopup(popupBigImage) })
+//popupBigImage.addEventListener('click', closeOnclick)
 popupProfile.addEventListener('click', closeOnclick)
 popupAddImg.addEventListener('click', closeOnclick)
 
