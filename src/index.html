@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Место</title>
+
+</head>
+<body class="page">
+    <section class="popup popup_profile">
+        <div class="popup__window">
+            <button type="button" class="popup__close popup__close-profile"></button>
+            <h2 class="popup__text">Редактировать профиль</h2>
+            <form class="popup__form popup__form-profile" name="user" novalidate>
+
+                <input type="text" id="name-input" class="popup__textarea popup__textarea_type_name" minlength="2"
+                    maxlength="40" required name="profileName">
+                <span id="name-input-error" class="popup__error "></span>
+                <input type="text" id="job-input" class="popup__textarea popup__textarea_type_status" minlength="2"
+                    maxlength="200" required name="jobName">
+                <span id="job-input-error" class="popup__error"></span>
+                <input type="submit" class="popup__button popup__save  "  value="Сохранить"
+                    name="subbutton" >
+            </form>
+        </div>
+    </section>
+    <section class="popup popup_img">
+        <div class="popup__window">
+            <button type="button" class="popup__close popup__close-img"></button>
+            <h2 class="popup__text">Новое место</h2>
+            <form class="popup__form popup__form-img" name="new" novalidate>
+                <input type="text" placeholder="заголовок" id="name-card"
+                    class="popup__textarea popup__textarea_img-title" minlength="2" maxlength="30" required
+                    name="title">
+                <span id="name-card-error" class="popup__error "></span>
+                <input type="url" id="link" placeholder="ссылка на картинку"
+                    class="popup__textarea popup__textarea_link" required name="img">
+                <span id="link-error" class="popup__error"></span>
+                <input type="submit" class="popup__button popup__add popup__button_invalid " disabled value="Сохранить"
+                    name="subbutton">
+            </form>
+        </div>
+    </section>
+
+    <section class="popup popup_bigimage">
+        <div class="popup__image-window">
+            <div class="popup__close popup__close-bigimg"></div>
+            <img class="popup__image">
+            <p class="popup__title"></p>
+        </div>
+
+    </section>
+    <header class="header">
+
+        <img src="./images/Vector(1).svg" alt="лого" class="header__logo">
+
+    </header>
+    <main class="main">
+        <section class="profile">
+            <div class="profile__left-side">
+                <img src="./images/image.jpg" alt="кусто" class="profile__avatar">
+                <div class="profile__wrapper">
+                    <div class="profile__button-block">
+                        <h1 class="profile__name">Жак-Ив Кусто </h1>
+                        <button class="profile__edit-button" type="button"></button>
+                    </div>
+
+
+                    <p class="profile__status">Исследователь океана</p>
+                </div>
+            </div>
+
+
+
+
+
+            <button class="profile__add-button" type="button"></button>
+
+        </section>
+        <section class="elements">
+
+
+
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">
+            © 2022 Николай Желтов
+        </p>
+
+
+    </footer>
+    <template id="card-template" class="card-template">
+        <div class="card">
+            <button class="card__delete"></button>
+            <img class="card__image">
+            <div class="card__text-wrapper">
+                <p class="card__title"></p>
+                <button class="card__like-button"></button>
+            </div>
+        </div>
+    </template>
+
+
+  
+    </script>
+    
+
+
+</body>
+
+
+
+
+</html>
