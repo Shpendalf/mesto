@@ -67,14 +67,14 @@ imgValidate.enableValidation();
 const picPopup = new PopupWithImage (popupBigImage);
 
 const popupProfileCallback = (target) =>{
-  console.log(target)
+
   profile.setUserInfo(target)
  
 }
 const popupImgCallback =(data) =>{
-  console.log(data)
+  
   renderer(data)
-  console.trace()
+
 }
 
 
@@ -84,7 +84,7 @@ profileButtonOpen.addEventListener('click', ()=> {
   profileValidate.resetForm()
  
     newProfilePopup.setValues(profile.getUserInfo())
-    console.log(profile)
+   
     newProfilePopup.openPopup()
     
     })
