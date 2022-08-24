@@ -58,7 +58,7 @@ const readyCards = [{
 }
 ];
 const profile = new UserInfo ('.profile__name' , '.profile__status')
-const infoFields = new UserInfo('.profile__name'.textContent,'.profile__status'.textContent)
+
 const profileValidate = new FormValidator(parameters, formElementProfile);
 const imgValidate = new FormValidator(parameters, formElementImg);
 profileValidate.enableValidation();
@@ -83,9 +83,10 @@ const newImgPopup= new PopupWithForm({popupCallback:popupImgCallback,selector:'.
 profileButtonOpen.addEventListener('click', ()=> {
   profileValidate.resetForm()
  
-    profile.getUserInfo()
+    newProfilePopup.setInputValues(profile.getUserInfo())
     console.log(profile)
     newProfilePopup.openPopup()
+    
     })
     newProfilePopup.setEventListeners()
 

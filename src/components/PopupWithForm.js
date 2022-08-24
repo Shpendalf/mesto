@@ -16,6 +16,13 @@ _getInputValues(){
     
     return this._values;
 }
+
+setInputValues (data) {
+    Object.keys(data).forEach (key => {
+        const addinputs = this._inputs.find(item => item.name == key);
+        addinputs.value = data[key]
+    })
+}
 openPopup(){
     super.openPopup();
     
