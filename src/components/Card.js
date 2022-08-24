@@ -1,6 +1,4 @@
 
-import { bigImage, popupBigImage } from '../script/consts.js';
-import { bigImageTitle } from "../script/consts.js";
 
 
 export class Card {
@@ -58,6 +56,7 @@ export class Card {
   }
   _deleteCard() {
     this._element.remove();
+    this._element.null();
   }
 
 

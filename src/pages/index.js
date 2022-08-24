@@ -58,6 +58,7 @@ const readyCards = [{
 }
 ];
 const profile = new UserInfo ('.profile__name' , '.profile__status')
+const infoFields = new UserInfo('.profile__name'.textContent,'.profile__status'.textContent)
 const profileValidate = new FormValidator(parameters, formElementProfile);
 const imgValidate = new FormValidator(parameters, formElementImg);
 profileValidate.enableValidation();
@@ -81,23 +82,24 @@ const newProfilePopup = new PopupWithForm({popupCallback:popupProfileCallback,se
 const newImgPopup= new PopupWithForm({popupCallback:popupImgCallback,selector:'.popup_img'});
 profileButtonOpen.addEventListener('click', ()=> {
   profileValidate.resetForm()
-  
-  nameInput.value = profileName.textContent;
-   jobInput.value = profileJob.textContent;
+ 
+    profile.getUserInfo()
+    console.log(profile)
     newProfilePopup.openPopup()
     })
+    newProfilePopup.setEventListeners()
 
 profileButtonClose.addEventListener('click',()=> newProfilePopup.closePopup())
 
 popupAddBtn.addEventListener('click',() => {
   imgValidate.resetForm()
-  formLink.value ='',
-      
-  formTitle.value= ''
+  
+
   newImgPopup.openPopup()})
 
 buttonAddImgClose.addEventListener('click',() =>{newImgPopup.closePopup()
 })
+newImgPopup.setEventListeners()
 
 //newProfilePopup.setEventListeners()
 //newImgPopup.setEventListeners()
