@@ -83,7 +83,7 @@ const newImgPopup= new PopupWithForm({popupCallback:popupImgCallback,selector:'.
 profileButtonOpen.addEventListener('click', ()=> {
   profileValidate.resetForm()
  
-    newProfilePopup.setInputValues(profile.getUserInfo())
+    newProfilePopup.setValues(profile.getUserInfo())
     console.log(profile)
     newProfilePopup.openPopup()
     
