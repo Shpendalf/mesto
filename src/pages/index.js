@@ -6,6 +6,7 @@ import  FormValidator  from "../components/FormValidator.js"
 import PopupWithImage from "../components/PopupWithImage.js"
 import UserInfo from "../components/UserInfo.js"
 import Section from '../components/Section.js'
+import Api  from "../components/Api.js"
 const profileButtonOpen = document.querySelector('.profile__edit-button')
 const popupClasses = document.querySelectorAll('.popup')
 const popupClass = document.querySelector('.popup')
@@ -57,12 +58,20 @@ const readyCards = [{
   img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
 }
 ];
-const profile = new UserInfo ('.profile__name' , '.profile__status')
-
+const profile = new UserInfo ('.profile__name' , '.profile__status');
+const API_CONFIG ={
+  url:'https://mesto.nomoreparties.co/v1/cohort-52/cards',
+  token:'4e36934d-55ef-443b-ad3e-0396853ad963',
+  headers: {
+    'Content-Type':'application/json',
+  }
+}
+const newApi = new Api(API_CONFIG);
 const profileValidate = new FormValidator(parameters, formElementProfile);
 const imgValidate = new FormValidator(parameters, formElementImg);
 profileValidate.enableValidation();
 imgValidate.enableValidation();
+console.log(newApi)
 
 const picPopup = new PopupWithImage (popupBigImage);
 
@@ -77,7 +86,7 @@ const popupImgCallback =(data) =>{
 
 }
 
-
+newApi.getInitialCards() 
 const newProfilePopup = new PopupWithForm({popupCallback:popupProfileCallback,selector:'.popup_profile'});
 const newImgPopup= new PopupWithForm({popupCallback:popupImgCallback,selector:'.popup_img'});
 profileButtonOpen.addEventListener('click', ()=> {

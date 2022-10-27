@@ -19,32 +19,32 @@ export const bigImageClose = document.querySelector('.popup__close-bigimg')
 export const bigImage = popupBigImage.querySelector('.popup__image')
 export const bigImageTitle = popupBigImage.querySelector('.popup__title')
 export const submitButtons = document.querySelectorAll('.popup__button')
-export const readyCards = [{
+//export const readyCards = [{
 
-  title: 'Архыз',
-  img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-},
-{
-  title: 'Челябинская область',
-  img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-},
-{
-  title: 'Иваново',
-  img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-},
-{
-  title: 'Камчатка',
-  img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-},
-{
-  title: 'Холмогорский район',
-  img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-},
-{
-  title: 'Байкал',
-  img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-}
-];
+  //title: 'Архыз',
+ // img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+//},
+//{
+ // title: 'Челябинская область',
+  //img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+//},
+//{
+  //title: 'Иваново',
+  //img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+//},
+//{
+  //title: 'Камчатка',
+  //img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+//},
+//{
+ // title: 'Холмогорский район',
+  //img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+//},
+//{
+  //title: 'Байкал',
+  //img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+//}
+//];
 
 export const parameters = {
     formElement: '.popup__form',
