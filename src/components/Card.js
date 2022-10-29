@@ -2,11 +2,11 @@
 
 
 export class Card {
-  constructor(data, selector ,openPopupImage) {
+  constructor(data, selector ,openPopupImage, newApi) {
     this._openPopupImage = openPopupImage
-    this._name = data.title;
-    this._image = data.img;
-
+    this._name = data.name;
+    this._image = data.link;
+    this._api = newApi;
     this._selector = selector;
 
   }
@@ -28,7 +28,7 @@ export class Card {
     this._cardImage.alt = this._name
     this._element.querySelector('.card__title').textContent = this._name
     this._setEventListeners();
-
+    
 
     return this._element
   }

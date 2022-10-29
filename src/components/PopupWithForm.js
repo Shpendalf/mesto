@@ -1,12 +1,12 @@
 import Popup from "./Popup.js"
 
 export default class PopupWithForm extends Popup{
-    constructor({selector,  popupCallback}){
+    constructor({selector,  popupCallback, newApi}){
         super(selector);
     this.popupCallback = popupCallback;
     this._formElement = this._popupElement.querySelector(".popup__form");
     this._inputs = Array.from(this._popupElement.querySelectorAll(".popup__textarea"))
-   
+    this._api = newApi;
    
 }
 
