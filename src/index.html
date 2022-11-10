@@ -8,6 +8,30 @@
 
 </head>
 <body class="page">
+    <section class ="popup popup_delete">
+        <div class ="popup__window">
+            <button type="button" class="popup__close popup__close-delete"></button>
+                <h2 class ="popup__text"> Вы уверены?</h2>
+                 <form class ="popup__form popup__form-delete" name ="delete">
+                    <input type="submit" class="popup__button popup__save"  value="Да"
+                    name="subbutton">
+                 </form>
+            
+        </div>
+    </section>
+    <section class ="popup popup_avatar">
+        <div class ="popup__window">
+            <button type="button" class="popup__close popup__close-avatar"></button>
+            <h2 class="popup__text">Редактировать аватар</h2>
+            <form class="popup__form popup__form-avatar" name="avatar" novalidate>
+                <input type="url" id="avatar-input" class="popup__textarea popup__textarea_type_avatar" minlength="2"
+                required name="userPic" placeholder ="ссылка на изображение" required>
+                <span id="avatar-input-error" class="popup__error"></span>
+                <input type="submit" class="popup__button popup__save popup__button_invalid " disabled value="Сохранить"
+                    name="subbutton">
+            </form>
+        </div>
+    </section>
     <section class="popup popup_profile">
         <div class="popup__window">
             <button type="button" class="popup__close popup__close-profile"></button>
@@ -20,7 +44,7 @@
                 <input type="text" id="job-input" class="popup__textarea popup__textarea_type_status" minlength="2"
                     maxlength="200" required name="jobName">
                 <span id="job-input-error" class="popup__error"></span>
-                <input type="submit" class="popup__button popup__save  "  value="Сохранить"
+                <input type="submit" class="popup__button popup__save"  value="Сохранить"
                     name="subbutton" >
             </form>
         </div>
@@ -59,7 +83,10 @@
     <main class="main">
         <section class="profile">
             <div class="profile__left-side">
-                <img src="./images/image.jpg" alt="кусто" class="profile__avatar">
+                <div class ="profile__avatar-wrapper">
+                    <img src="./images/image.jpg" alt="кусто" class="profile__avatar">
+                </div>
+                
                 <div class="profile__wrapper">
                     <div class="profile__button-block">
                         <h1 class="profile__name">Жак-Ив Кусто </h1>
@@ -97,7 +124,12 @@
             <img class="card__image">
             <div class="card__text-wrapper">
                 <p class="card__title"></p>
-                <button class="card__like-button"></button>
+                <div class ="card__like-wrapper">
+                    <button class="card__like-button"></button>
+                    <p class ="card__like-count">0</p>
+                </div>
+                
+
             </div>
         </div>
     </template>

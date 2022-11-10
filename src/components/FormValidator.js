@@ -29,7 +29,7 @@ resetForm(){
 
     this._inactiveButton()
     
-      
+    //console.log(this._inactiveButton())  
   this._inputList.forEach((input) => {
     const errorElement = this._checkForm.querySelector(`#${input.id}-error`);
     this._hideInputError(errorElement)
