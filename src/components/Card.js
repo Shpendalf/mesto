@@ -47,7 +47,7 @@ generateCard() {
   this._likesCount.textContent = this._likes.length;
   this._setEventListeners();
   
-  if (!this._mine) {
+  if (!this._isMine) {
     this._deleteBtn.remove();
 }
 if (this._isLiked) {

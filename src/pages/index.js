@@ -65,6 +65,7 @@ newApi.getData().then(([userData,initialCards])=>{
   const arr = initialCards.reverse().slice(0,12)
   const data = userData 
   profile.getUserId(userData._id);
+  console.log(profile.uId)
   profile.setUserInfo(data)
   cardsHolder.renderItems(arr)
  
@@ -167,7 +168,7 @@ function constructCard(data) {
       },
 
      profile.uId,
-
+     
       
       () => {
           newApi.newLike(readyCard.elementId)
