@@ -36,6 +36,7 @@
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__text-wrapper/card__text-wrapper.css);
+@import url(../blocks/card/__like-wrapper/card__like-wrapper.css);
 @import url(../blocks/card/__like-button/card__like-button.css);
 @import url(../blocks/card/__like-button/_toggle/card__like-button_toggle.css);
 @import url(../blocks/footer/footer.css);

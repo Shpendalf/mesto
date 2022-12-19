@@ -4,7 +4,7 @@ export default class Popup{
         this._closeOnKeydown = this._closeOnKeydown.bind(this)
         this.closeOnclick = this.closeOnclick.bind(this)
         
-        console.log(this._popupElement)
+     
     }
  
      
@@ -16,14 +16,14 @@ export default class Popup{
         }
       }
       closeOnclick = (e) => {
-        console.log(e.target)
+      
         if ( (e.target  === e.currentTarget) || (e.target.classList.contains('popup__close'))){
           this.closePopup() 
         } ;
       
       } 
       openPopup  () {
-        console.log(this._popupElement)
+       
         this._popupElement.classList.add('popup_open');
         document.addEventListener('keydown', this._closeOnKeydown)
 

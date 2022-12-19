@@ -23,7 +23,7 @@ const popupDelete =new PopupDelete ('.popup_delete');
 
 const picPopup = new PopupWithImage (popupBigImage);
 popupDelete.setEventListeners();
-const profile = new UserInfo ('.profile__name' , '.profile__status', '.profile__avatar');
+const profile = new UserInfo ('.profile__name' , '.profile__status','.profile__avatar');
 const API_CONFIG ={
   url:'https://mesto.nomoreparties.co/v1/cohort-54',
  
@@ -41,55 +41,7 @@ imgValidate.enableValidation();
 avatarValidate.enableValidation()
 
 
-
-function popupImgCallback (data) {
-   newImgPopup.buttonLoading(true);
-   newApi.createCards(data)
-   .then((res)=>{
-    renderer(res)
-   })
-   .catch((err)=>
-   console.log(err)
-   )
-   .finally(()=>
-   newImgPopup.buttonLoading(false))
- 
-  }
-  
-function renderer(data){
-  const readyCard = constructCard(data);
-  cardsHolder.setItem(readyCard);
-}
-const cardsHolder = new Section(renderer,'.elements') ;
-newApi.getData().then(([userData,initialCards])=>{
-  const arr = initialCards.reverse().slice(0,12)
-  const data = userData 
-  profile.getUserId(userData._id);
-  profile.setUserInfo(data)
-  cardsHolder.renderItems(arr)
- 
-   
-}
-
-)
-const newAvatarPopup = new PopupWithForm('.popup_avatar',(data) => {
-  newAvatarPopup.buttonLoading(true)
-
-  newApi.editAvatar(data.userPic)
-  .then(()=>{
-   
-    profile.setImage(data.userPic);
-    newAvatarPopup.closePopup();
-  })
-  .catch((error) => {
-    console.log(error ,"Ошибочка получилась")
-  })
-  
-  
-})
- 
-
-const newProfilePopup = new PopupWithForm('.popup_profile',  (profileValues) => {
+function popupProfileCallback (profileValues){
   newProfilePopup.buttonLoading(true)
   const newData ={name: profileValues.profileName, 
                   about: profileValues.jobName}
@@ -103,8 +55,46 @@ const newProfilePopup = new PopupWithForm('.popup_profile',  (profileValues) => 
     })
     .catch(err => console.log(err))
     .finally(() => newProfilePopup.buttonLoading(false))
-});
-const newImgPopup= new PopupWithForm('.popup_img',popupImgCallback);
+}
+const popupImgCallback =(data) =>{
+  
+  renderer(data)
+
+}
+function renderer(item){
+  const generatedCard = constructCard(item);
+  cardsHolder.setItem(generatedCard);
+}
+const cardsHolder = new Section(renderer,'.elements') ;
+newApi.getData().then(([initialCards,userData])=>{
+  const arr = initialCards.reverse().slice(0,12)
+  const data = userData 
+  profile.setUserInfo(data)
+  cardsHolder.renderItems(arr)
+ 
+   
+}
+
+)
+const newAvatarPopup = new PopupWithForm({popupCallback:(data) => {
+  newAvatarPopup.buttonLoading(true)
+
+  newApi.editAvatar(data.userPic)
+  .then(()=>{
+   
+    profile.setImage(data.userPic);
+    newAvatarPopup.closePopup();
+  })
+  .catch((error) => {
+    console.log(error ,"Ошибочка получилась")
+  })
+  
+  
+},selector:'.popup_avatar'})
+ 
+
+const newProfilePopup = new PopupWithForm({popupCallback:popupProfileCallback,selector:'.popup_profile'});
+const newImgPopup= new PopupWithForm({popupCallback:popupImgCallback,selector:'.popup_img'});
 
 newAvatarPopup.setEventListeners();
 profileButtonOpen.addEventListener('click', ()=> {
@@ -138,64 +128,59 @@ popupUserPicOpen.addEventListener('click',()=>{
   newAvatarPopup.openPopup();
 })
 
-function constructCard(data) {
-  const readyCard = new Card(data,
+function constructCard(data){
 
-    '.card-template',
+  const readyCard = new Card(data,'.card-template',
+  ()=>{
+  picPopup.openPopup({
+    name:data.name,
+    link:data.link,
+   
+  })},
+  ()=>{ popupDelete.openPopup(
+    ()=>{
+      newApi.removeCard(readyCard.elementId)
+      .then(()=>{
+        readyCard._deleteCard();
 
-      () => {
-        picPopup.openPopup({
-              name: data.name,
-              link: data.link
-          })
-      },
+      })
+      .catch((error) => {
+        console.log("Ошибка",error)
+      })
+    })
+  
+},
+   
 
-     
-      () => {
-        popupDelete.openPopup(
+
+  profile.getUserId(data._id),
+ 
+  
+  ()=>{
+    newApi.newLike(readyCard.elementId)
+    .then((res)=>{
+      readyCard.likes(res.likes)
+    })
+    .catch((error) => {
+      console.log("Ошибка",error)
+    })
+  },
+  ()=>{
+    newApi.newDislike(readyCard.elementId)
+    .then((res)=>{
+      readyCard.likes(res.likes)
+    })
+    .catch((error) => {
+      console.log("Ошибка",error)
+    })
+  }
+ 
+
+);
+
     
-              () => {
-                newApi.removeCard(readyCard.elementId)
-                .then(()=>{
-                  readyCard._deleteCard();
-          
-                })
-                .catch((error) => {
-                  console.log("Ошибка",error)
-                })
-              })
-      },
-
-     profile.uId,
-
-      
-      () => {
-          newApi.newLike(readyCard.elementId)
-              .then((res) => {
-                readyCard.setLike(res.likes.length);
-           
-              })
-              .catch((error) => {
-                  console.log(error)
-              })
-      },
-
-     
-      () => {
-          newApi.newDislike(readyCard.elementId)
-              .then((res) => {
-                readyCard.setDisLike(res.likes.length);
-                 
-              })
-              .catch((error) => {
-                  console.log(error)
-              })
-      }
-  );
-  return readyCard.generateCard();
-}
-
-
+  return readyCard.generateCard()
+  }
 
 
 

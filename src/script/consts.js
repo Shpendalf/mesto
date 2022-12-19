@@ -21,6 +21,7 @@ export const bigImageClose = document.querySelector('.popup__close-bigimg')
 export const bigImage = popupBigImage.querySelector('.popup__image')
 export const bigImageTitle = popupBigImage.querySelector('.popup__title')
 export const submitButtons = document.querySelectorAll('.popup__button')
+
 //export const readyCards = [{
 
   //title: 'Архыз',
