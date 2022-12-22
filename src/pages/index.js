@@ -75,7 +75,7 @@ const avatarPopup = new PopupWithForm(".popup_avatar", (data) => {
     .catch((error) => {
       console.log(error, "Ошибочка получилась");
     })
-    .finally(() => ImgPopup.buttonLoading(false));
+    .finally(() => avatarPopup.buttonLoading(false));
     
     
 });
